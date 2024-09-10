@@ -5,6 +5,8 @@ import MyNavbar from './Navbar'; // Ensure correct import path
 import SignUp from './SignUp'; // Ensure correct import path
 import Login from './Login'; // Import the Login component
 import AboutUs from './AboutUs'; // Import the AboutUs component
+import TopicsPage from './TopicsPage'; // Import the TopicsPage component
+import CommunityPage from './CommunityPage'; // Import the CommunityPage component
 
 function App() {
     const gradientStyle = {
@@ -81,6 +83,8 @@ function App() {
                     <Route path="/about-us" element={<AboutUs />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/topics" element={<TopicsPage />} />
+                    <Route path="/community/:topic" element={<CommunityPage />} />
                 </Routes>
             </div>
         </Router>

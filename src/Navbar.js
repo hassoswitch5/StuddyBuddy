@@ -1,4 +1,4 @@
-// src/components/Navbar.js
+// src/Navbar.js
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
@@ -67,7 +67,7 @@ const MyNavbar = () => {
                     <li><Link to="/" style={navLinkStyle}>Home</Link></li>
                     <li><Link to="/about-us" style={navLinkStyle}>About Us</Link></li>
                     <li><a href="#ContactUs" style={navLinkStyle}>Contact Us</a></li>
-                    <li><a href="#Product" style={navLinkStyle}>Product</a></li>
+                    <li><a href="/topics" style={navLinkStyle}>topicpage</a></li>
                 </ul>
                 <Link to="/signup" style={buttonStyle}>Sign Up</Link>
                 <Link to="/login" style={{ ...buttonStyle, marginLeft: '10px' }}>Login</Link>
