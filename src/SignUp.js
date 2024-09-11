@@ -4,17 +4,37 @@ import { useNavigate } from 'react-router-dom';
 const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleSignUp = (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
 
+        try {
+            const response = await fetch('http://localhost:5000/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
 
+            const data = await response.json();
+
+            if (response.ok) {
+                navigate('/login');
+            } else {
+                setError(data.error);
+            }
+        } catch (err) {
+            setError('An error occurred');
+        }
     };
 
     return (
         <div style={containerStyle}>
             <h2>Sign Up</h2>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleSignUp}>
                 <label style={labelStyle}>
                     Email:

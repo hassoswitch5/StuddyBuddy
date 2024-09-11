@@ -1,4 +1,4 @@
-// src/CommunityPage.js
+// ko/CommunityPage.js
 import React from 'react';
 import { useParams } from 'react-router-dom';
 

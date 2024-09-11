@@ -1,5 +1,5 @@
-// src/App.js
-import React from 'react';
+// ko/App.js
+import React,{useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MyNavbar from './Navbar'; // Ensure correct import path
 import SignUp from './SignUp'; // Ensure correct import path
@@ -16,7 +16,29 @@ function App() {
         display: 'flex',
         flexDirection: 'column'
     };
+    const [data, setData] = useState([{}])
 
+    useEffect(() => {
+        fetch("/members").then(
+            res => res.json()
+        ).then(
+            data => {
+                setData(data)
+                console.log(data)
+            }
+
+
+        )
+
+
+        }
+
+
+
+
+
+
+    )
     const mainContentStyle = {
         flex: 1,
         display: 'flex',
