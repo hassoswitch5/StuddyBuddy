@@ -4,10 +4,9 @@ from flask_login import UserMikin
 from flask_wtf import flaskforms
 from wtforms import StringField,PasswordField, SubmitField
 from wtforms.validators import InputRequired , Length , ValidationError
+from pymongo import MongoClient
 
 app = Flask (__name__)
-db= SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///database.db'
 app.config['SECRET_KEY']='protons'
 
 
@@ -17,7 +16,7 @@ class User(db.Model , UserMikin ) :
     password =db.colum (db.String (80) ,nullable=False)
 
 
-class RegisterForm(FlakForm) :
+class RegisterForm(FlaskForm) :
     username= StringField (validators=[InputRequired(), Length(
         min=4 , max =20 )], render_kw={"placeholder":"password"})
     
@@ -31,12 +30,12 @@ class RegisterForm(FlakForm) :
             username=username.data ).first()
         if exsisting_username:
             raise ValidationError(
-                "that username already exists . please choose adifferent onee"
+                "that username already exists . please choose a different one"
             )
         
 
 
-class loginForm(FlakForm) :
+class loginForm(FlaskForm) :
     username= StringField (validators=[InputRequired(), Length(
         min=4 , max =20 )], render_kw={"placeholder":"password"})
     
