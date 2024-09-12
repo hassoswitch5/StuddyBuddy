@@ -28,4 +28,22 @@ def signup():
 
     return jsonify({'message': 'User created successfully'}), 201
 
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    email = data.get('email')
+    password = data.get('password')
+
+    if not email or not password:
+        return jsonify({'error': 'Email and password are required'}), 400
+
+    user = users_collection.find_one({'email': email})
+    if not user or not check_password_hash(user['password'], password):
+        return jsonify({'error': 'Invalid email or password'}), 401
+
+    return jsonify({'message': 'Login successful'}), 200
+
+if _name_ == '_main_':
+    app.run(debug=True)
+
 
