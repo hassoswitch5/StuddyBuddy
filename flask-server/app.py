@@ -10,6 +10,7 @@ MONGO_URI = 'mongodb://localhost:27017'
 client = MongoClient(MONGO_URI)
 db = client['StudyBuddy']
 users_collection = db.users
+community_collection=db.community
 
 def hash_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -53,6 +54,34 @@ def login():
 @app.route('/users/')
 def get_user(name):
     return f'Hello, {name}!'
+
+@app.route('/community/create', methods=['POST'])
+def create_post():
+    data = request.json
+    nam = data.get('name')
+    title = data.get('title')
+    topic= data.get('topic')
+    description = data.get('description')
+    if not nam or not title or not description or not topic:
+        return jsonify({'error': 'name, title, topic and description are required'}), 400
+    
+    community_collection.insert_one({'name': nam, 'title': title, 'description': description, 'topic':topic})
+    return ('Post created successfully')
+
+@app.route('/community/get', methods=['GET'])
+def get_posts():
+    topic = request.args.get('topic')
+    if topic:
+        posts = community_collection.find({'topic': topic})
+    else:
+        posts = community_collection.find()
+    
+    posts_list = []
+    for post in posts:
+        post['_id'] = str(post['_id'])
+        posts_list.append(post)
+
+    return jsonify(posts_list)
 
 if __name__ == '__main__':
     app.run(debug=True)
