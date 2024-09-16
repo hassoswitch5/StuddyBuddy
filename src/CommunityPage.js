@@ -1,38 +1,37 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './index.css';
+
 const CommunityPage = () => {
   const { topic } = useParams();
-  const gradientStyle = {
-    background: '#a2d3e9',
-    height: '100vh',
-    margin: 0,
-    display: 'flex',
-    flexDirection: 'column',
-  };
-  const mainContentStyle = {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-    padding: '0 20px',
-  };
   const [commentText, setCommentText] = useState('');
   const [comments, setComments] = useState([
-  `Are you eager to study ${topic}`,
-  `what do you know about ${topic}`,
+    { text: `Are you eager to study ${topic}?`, replies: [], showReplies: false },
+    { text: `What do you know about ${topic}?`, replies: [], showReplies: false },
   ]);
   const [usefulStates, setUsefulStates] = useState({});
+  const [isCommentAreaVisible, setCommentAreaVisible] = useState(false);
+  const [replyingTo, setReplyingTo] = useState(null);
 
   const handleSendClick = () => {
     if (commentText.trim() === '') {
       alert('Comment cannot be empty');
       return;
     }
-    setComments([...comments, commentText]);
+
+    if (replyingTo !== null) {
+      // Add reply to a specific comment
+      const updatedComments = [...comments];
+      updatedComments[replyingTo].replies.push(commentText);
+      setComments(updatedComments);
+      setReplyingTo(null);
+    } else {
+      // Add a new comment
+      setComments([...comments, { text: commentText, replies: [], showReplies: false }]);
+    }
+
     setCommentText('');
+    setCommentAreaVisible(false);
   };
 
   const handleUsefulClick = (index) => {
@@ -42,45 +41,87 @@ const CommunityPage = () => {
     }));
   };
 
+  const handleReplyClick = (index) => {
+    setReplyingTo(index);
+    setCommentText(`Reply to: ${comments[index].text}`);
+    setCommentAreaVisible(true);
+  };
+
+  const handleWritePostClick = () => {
+    setReplyingTo(null);
+    setCommentText('');
+    setCommentAreaVisible(true);
+  };
+
+  const toggleRepliesVisibility = (index) => {
+    const updatedComments = [...comments];
+    updatedComments[index].showReplies = !updatedComments[index].showReplies;
+    setComments(updatedComments);
+  };
+
+  const renderComment = (comment, index) => (
+    <div key={index} className="comment-item">
+      <div className="comment-content">
+        <button
+          className="comment-button"
+          onClick={() => toggleRepliesVisibility(index)}
+        >
+          {comment.text}
+        </button>
+        <button
+          onClick={() => handleUsefulClick(index)}
+          className={`useful-button ${usefulStates[index] ? 'active' : ''}`}
+          style={{
+            backgroundColor: usefulStates[index] ? '#2c94cc' : 'initial',
+            color: usefulStates[index] ? 'white' : 'black',
+          }}
+        >
+          useful
+        </button>
+        <button
+          onClick={() => handleReplyClick(index)}
+          className="reply-button"
+        >
+          reply
+        </button>
+      </div>
+      {comment.showReplies && (
+        <div className="replies-container">
+          {comment.replies.map((reply, replyIndex) => renderComment({ text: reply, replies: [] }, replyIndex))}
+        </div>
+      )}
+    </div>
+  );
+
   return (
-    <div className="CommunityPage" style={gradientStyle}>
-      <div style={mainContentStyle}>
-        <h1 style={{ fontWeight: 'bold', fontSize: '60px' }}>
-          Community for {topic}
-        </h1>
+    <div className="CommunityPage">
+      <div className="main-content">
+        <h1 className="header">Community for {topic}</h1>
+        <button
+          onClick={handleWritePostClick}
+          className="comment-input-button"
+        >
+          Write your post
+        </button>
         <div className="comments-container">
-          {comments.map((comment, index) => (
-            <div key={index} className="comment-item">
-              <button className="comment-button">
-                {comment}
-              </button>
-              <button
-                onClick={() => handleUsefulClick(index)}
-                className="useful-button"
-                style={{
-                  backgroundColor: usefulStates[index] ? '#2c94cc' : 'initial',
-                  color: usefulStates[index] ? 'black' : 'black',
-                }}
-              >
-                useful
-              </button>
-            </div>
-          ))}
+          {comments.map((comment, index) => renderComment(comment, index))}
         </div>
-        <div className="comment-area-container">
-          <textarea
-            className="comment-textarea"
-            value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
-            placeholder="Type your comment here..."
-          />
-          <button
-            onClick={handleSendClick}
-            className="send-button"
-          >
-            send
-          </button>
-        </div>
+        {isCommentAreaVisible && (
+          <div className="comment-area-container">
+            <textarea
+              className="comment-textarea"
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              placeholder="Type your comment here..."
+            />
+            <button
+              onClick={handleSendClick}
+              className="send-button"
+            >
+              Send
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
