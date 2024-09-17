@@ -12,6 +12,7 @@ db = client['StudyBuddy']
 users_collection = db.users
 community_collection=db.community
 topics_collection=db.topic
+tasks_collection=db.topic
 
 def hash_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -96,7 +97,17 @@ def get_posts():
 
     return jsonify(posts_list)
 
+@app.route('/tasks/add', methods=['POST'])
+def add_topic():
+    data = request.json
+    task = data.get('task')
+    tasks_collection.insert_one({'task':task})
+    return task
 
+@app.route('/topic/get', methods=['GET'])
+def get_topic():
+    tsk = tasks_collection.find()
+    return tsk 
 
 if __name__ == '__main__':
     app.run(debug=True)
