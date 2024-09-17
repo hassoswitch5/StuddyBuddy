@@ -129,6 +129,7 @@ const CommunityPage = () => {
         )}
       </div>
     </div>
+    
   );
 };
 export default CommunityPage;
