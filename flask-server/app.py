@@ -11,6 +11,7 @@ client = MongoClient(MONGO_URI)
 db = client['StudyBuddy']
 users_collection = db.users
 community_collection=db.community
+topics_collection=db.topic
 
 def hash_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -55,6 +56,14 @@ def login():
 def get_user(name):
     return f'Hello, {name}!'
 
+@app.route('/topic/add', methods=['POST'])
+def add_topic():
+    data = request.json
+    topics = data.get('topic')
+    topics_collection.insert_one({'topic':topics})
+    return topics
+
+
 @app.route('/community/create', methods=['POST'])
 def create_post():
     data = request.json
@@ -82,6 +91,8 @@ def get_posts():
         posts_list.append(post)
 
     return jsonify(posts_list)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
