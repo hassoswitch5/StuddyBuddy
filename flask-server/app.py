@@ -12,7 +12,7 @@ db = client['StudyBuddy']
 users_collection = db.users
 community_collection=db.community
 topics_collection=db.topic
-tasks_collection=db.topic
+tasks_collection=db.task
 
 def hash_password(password):
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -60,14 +60,16 @@ def get_user(name):
 @app.route('/topic/add', methods=['POST'])
 def add_topic():
     data = request.json
-    topics = data.get('topic')
-    topics_collection.insert_one({'topic':topics})
-    return topics
+    topic = data.get('topic')
+    topics_collection.insert_one({'topic':topic})
+    return ({'topic': topic})
 
 @app.route('/topic/get', methods=['GET'])
 def get_topic():
     tpc = topics_collection.find()
-    return tpc 
+    topics_list = [{'topic': i['topic']}]
+    for i in tpc:
+        return topics_list
 
 @app.route('/community/create', methods=['POST'])
 def create_post():
@@ -97,17 +99,23 @@ def get_posts():
 
     return jsonify(posts_list)
 
-@app.route('/tasks/add', methods=['POST'])
+@app.route('/task/add', methods=['POST'])
 def add_topic():
     data = request.json
     task = data.get('task')
     tasks_collection.insert_one({'task':task})
-    return task
+    return ({'task': task})
 
-@app.route('/topic/get', methods=['GET'])
+@app.route('/task/get', methods=['GET'])
 def get_topic():
     tsk = tasks_collection.find()
-    return tsk 
+    tasks_list = [{'task': j['task'], '_id': str(j['_id'])} for j in tsk]
+    return tasks_list
+
+@app.route('/tasks/delete', methods=['DELETE'])
+def delete_task():
+    tasks_collection.delete_one()
+    return ("Task deleted")
 
 if __name__ == '__main__':
     app.run(debug=True)
