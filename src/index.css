@@ -127,6 +127,16 @@ code {
   cursor: pointer;
   margin-left: 5px;
 }
+.delete-reply-button {
+  background-color: #ff4d4d;
+  color: black;
+  padding: 2px ;
+  border-radius: 12px;
+  font-size: 7px;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
 .file-upload-button {
   color:black;
   border: none;

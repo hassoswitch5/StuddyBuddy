@@ -5,8 +5,8 @@ const CommunityPage = () => {
   const { topic } = useParams();
   const [commentText, setCommentText] = useState('');
   const [comments, setComments] = useState([
-     //{ text: `Are you eager to study ${topic}?`, replies: [], showReplies: false },
-     // { text: `What do you know about ${topic}?`, replies: [], showReplies: false },
+      //{ text:`Are you eager to study ${topic}?`, replies: [], showReplies: false },
+      //{ text: `What do you know about ${topic}?`, replies: [], showReplies: false },
   ]);
   const [usefulStates, setUsefulStates] = useState({});
   const [isCommentAreaVisible, setCommentAreaVisible] = useState(false);
@@ -17,24 +17,26 @@ const CommunityPage = () => {
       alert('Comment cannot be empty');
       return;
     }
+    const updatedComments = [...comments];
     if (replyingTo !== null) {
       if (commentText.trim() === '' && !file) {
         alert('Reply cannot be empty');
         return;
       }
-      const updatedComments = [...comments];
       updatedComments[replyingTo].replies.push({
         text: commentText,
         file,
       });
-      setComments(updatedComments);
       setReplyingTo(null);
     } else {
-      setComments([
-        ...comments,
-        { text: commentText, file, replies: [], showReplies: false },
-      ]);
+      updatedComments.push({
+        text: commentText,
+        file,
+        replies: [],
+        showReplies: false,
+      });
     }
+    setComments(updatedComments);
     setCommentText('');
     setFile(null);
     setCommentAreaVisible(false);
@@ -66,8 +68,13 @@ const CommunityPage = () => {
     setCommentText('');
     setFile(null);
   };
-  const handleDeleteCommentClick = (index) => {
-    const updatedComments = comments.filter((_, i) => i !== index);
+  const handleDeleteCommentClick = (index, isReply = false, replyIndex = null) => {
+    const updatedComments = [...comments];
+    if (isReply && replyIndex !== null) {
+      updatedComments[index].replies.splice(replyIndex, 1);
+    } else {
+      updatedComments.splice(index, 1);
+    }
     setComments(updatedComments);
   };
   const toggleRepliesVisibility = (index) => {
@@ -118,9 +125,44 @@ const CommunityPage = () => {
       </div>
       {comment.showReplies && (
         <div className="replies-container">
-          {comment.replies.map((reply, replyIndex) =>
-            renderComment({ text: reply.text, file: reply.file, replies: [] }, `${index}-${replyIndex}`)
-          )}
+          {comment.replies.map((reply, replyIndex) => (
+            <div key={`${index}-${replyIndex}`} className="reply-item">
+              <div className="reply-content">
+                <span>{reply.text}</span>
+                {reply.file && (
+                  <div className="reply-file">
+                    <div className="file-link">
+                      <a href={URL.createObjectURL(reply.file)} target="_blank" rel="noopener noreferrer">
+                        Open {reply.file.name}
+                      </a>
+                    </div>
+                  </div>
+                )}
+                <button
+                  onClick={() => handleUsefulClick(`${index}-${replyIndex}`)}
+                  className={`useful-button ${usefulStates[`${index}-${replyIndex}`] ? 'active' : ''}`}
+                  style={{
+                    backgroundColor: usefulStates[`${index}-${replyIndex}`] ? '#2c94cc' : 'initial',
+                    color: usefulStates[`${index}-${replyIndex}`] ? 'white' : 'black',
+                  }}
+                >
+                  useful
+                </button>
+                <button
+                  onClick={() => handleReplyClick(`${index}-${replyIndex}`)}
+                  className="reply-button"
+                >
+                  reply
+                </button>
+                <button
+                  onClick={() => handleDeleteCommentClick(index, true, replyIndex)}
+                  className="delete-reply-button"
+                >
+                  Delete Reply
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
