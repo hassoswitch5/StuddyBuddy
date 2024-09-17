@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './index.css';
-
 const CommunityPage = () => {
   const { topic } = useParams();
   const [commentText, setCommentText] = useState('');
   const [comments, setComments] = useState([
-    { text: `Are you eager to study ${topic}?`, replies: [], showReplies: false },
-    { text: `What do you know about ${topic}?`, replies: [], showReplies: false },
+    //{ text: `Are you eager to study ${topic}?`, replies: [], showReplies: false },
+    //{ text: `What do you know about ${topic}?`, replies: [], showReplies: false },
   ]);
   const [usefulStates, setUsefulStates] = useState({});
   const [isCommentAreaVisible, setCommentAreaVisible] = useState(false);
@@ -20,45 +19,46 @@ const CommunityPage = () => {
     }
 
     if (replyingTo !== null) {
-      // Add reply to a specific comment
+      if (commentText.trim() === '') {
+        alert('Reply cannot be empty');
+        return;
+      }
       const updatedComments = [...comments];
       updatedComments[replyingTo].replies.push(commentText);
       setComments(updatedComments);
       setReplyingTo(null);
     } else {
-      // Add a new comment
       setComments([...comments, { text: commentText, replies: [], showReplies: false }]);
     }
-
     setCommentText('');
     setCommentAreaVisible(false);
   };
-
   const handleUsefulClick = (index) => {
     setUsefulStates((prev) => ({
       ...prev,
       [index]: !prev[index],
     }));
   };
-
   const handleReplyClick = (index) => {
     setReplyingTo(index);
-    setCommentText(`Reply to: ${comments[index].text}`);
+    setCommentText('');
     setCommentAreaVisible(true);
   };
-
   const handleWritePostClick = () => {
     setReplyingTo(null);
     setCommentText('');
     setCommentAreaVisible(true);
   };
-
+  const handleCloseClick = () => {
+    setCommentAreaVisible(false);
+    setReplyingTo(null);
+    setCommentText('');
+  };
   const toggleRepliesVisibility = (index) => {
     const updatedComments = [...comments];
     updatedComments[index].showReplies = !updatedComments[index].showReplies;
     setComments(updatedComments);
   };
-
   const renderComment = (comment, index) => (
     <div key={index} className="comment-item">
       <div className="comment-content">
@@ -87,12 +87,11 @@ const CommunityPage = () => {
       </div>
       {comment.showReplies && (
         <div className="replies-container">
-          {comment.replies.map((reply, replyIndex) => renderComment({ text: reply, replies: [] }, replyIndex))}
+          {comment.replies.map((reply, replyIndex) => renderComment({ text: reply, replies: [] }, `${index}-${replyIndex}`))}
         </div>
       )}
     </div>
   );
-
   return (
     <div className="CommunityPage">
       <div className="main-content">
@@ -120,10 +119,17 @@ const CommunityPage = () => {
             >
               Send
             </button>
+            <button
+              onClick={handleCloseClick}
+              className="close-button"
+            >
+              Close
+            </button>
           </div>
         )}
       </div>
     </div>
+    
   );
 };
 export default CommunityPage;
