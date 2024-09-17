@@ -5,33 +5,42 @@ const CommunityPage = () => {
   const { topic } = useParams();
   const [commentText, setCommentText] = useState('');
   const [comments, setComments] = useState([
-    //{ text: `Are you eager to study ${topic}?`, replies: [], showReplies: false },
-    //{ text: `What do you know about ${topic}?`, replies: [], showReplies: false },
+     //{ text: `Are you eager to study ${topic}?`, replies: [], showReplies: false },
+     // { text: `What do you know about ${topic}?`, replies: [], showReplies: false },
   ]);
   const [usefulStates, setUsefulStates] = useState({});
   const [isCommentAreaVisible, setCommentAreaVisible] = useState(false);
   const [replyingTo, setReplyingTo] = useState(null);
-
+  const [file, setFile] = useState(null);
   const handleSendClick = () => {
-    if (commentText.trim() === '') {
+    if (commentText.trim() === '' && !file) {
       alert('Comment cannot be empty');
       return;
     }
-
     if (replyingTo !== null) {
-      if (commentText.trim() === '') {
+      if (commentText.trim() === '' && !file) {
         alert('Reply cannot be empty');
         return;
       }
       const updatedComments = [...comments];
-      updatedComments[replyingTo].replies.push(commentText);
+      updatedComments[replyingTo].replies.push({
+        text: commentText,
+        file,
+      });
       setComments(updatedComments);
       setReplyingTo(null);
     } else {
-      setComments([...comments, { text: commentText, replies: [], showReplies: false }]);
+      setComments([
+        ...comments,
+        { text: commentText, file, replies: [], showReplies: false },
+      ]);
     }
     setCommentText('');
+    setFile(null);
     setCommentAreaVisible(false);
+  };
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
   const handleUsefulClick = (index) => {
     setUsefulStates((prev) => ({
@@ -42,17 +51,24 @@ const CommunityPage = () => {
   const handleReplyClick = (index) => {
     setReplyingTo(index);
     setCommentText('');
+    setFile(null);
     setCommentAreaVisible(true);
   };
   const handleWritePostClick = () => {
     setReplyingTo(null);
     setCommentText('');
+    setFile(null);
     setCommentAreaVisible(true);
   };
   const handleCloseClick = () => {
     setCommentAreaVisible(false);
     setReplyingTo(null);
     setCommentText('');
+    setFile(null);
+  };
+  const handleDeleteCommentClick = (index) => {
+    const updatedComments = comments.filter((_, i) => i !== index);
+    setComments(updatedComments);
   };
   const toggleRepliesVisibility = (index) => {
     const updatedComments = [...comments];
@@ -68,6 +84,15 @@ const CommunityPage = () => {
         >
           {comment.text}
         </button>
+        {comment.file && (
+          <div className="comment-file">
+            <div className="file-link">
+              <a href={URL.createObjectURL(comment.file)} target="_blank" rel="noopener noreferrer">
+                Open {comment.file.name}
+              </a>
+            </div>
+          </div>
+        )}
         <button
           onClick={() => handleUsefulClick(index)}
           className={`useful-button ${usefulStates[index] ? 'active' : ''}`}
@@ -84,14 +109,25 @@ const CommunityPage = () => {
         >
           reply
         </button>
+        <button
+          onClick={() => handleDeleteCommentClick(index)}
+          className="delete-button"
+        >
+          Delete
+        </button>
       </div>
       {comment.showReplies && (
         <div className="replies-container">
-          {comment.replies.map((reply, replyIndex) => renderComment({ text: reply, replies: [] }, `${index}-${replyIndex}`))}
+          {comment.replies.map((reply, replyIndex) =>
+            renderComment({ text: reply.text, file: reply.file, replies: [] }, `${index}-${replyIndex}`)
+          )}
         </div>
       )}
     </div>
   );
+  const handleFileButtonClick = () => {
+    document.getElementById('file-input').click();
+  };
   return (
     <div className="CommunityPage">
       <div className="main-content">
@@ -113,23 +149,37 @@ const CommunityPage = () => {
               onChange={(e) => setCommentText(e.target.value)}
               placeholder="Type your comment here..."
             />
-            <button
-              onClick={handleSendClick}
-              className="send-button"
-            >
-              Send
-            </button>
-            <button
-              onClick={handleCloseClick}
-              className="close-button"
-            >
-              Close
-            </button>
+            <input
+              type="file"
+              id="file-input"
+              className="file-input"
+              onChange={handleFileChange}
+              style={{ display: 'none' }}
+            />
+            <div className="button-container">
+              <button
+                onClick={handleFileButtonClick}
+                className="file-upload-button"
+              >
+                +
+              </button>
+              <button
+                onClick={handleSendClick}
+                className="send-button"
+              >
+                Send
+              </button>
+              <button
+                onClick={handleCloseClick}
+                className="close-button"
+              >
+                Close
+              </button>
+            </div>
           </div>
         )}
       </div>
     </div>
-    
   );
 };
 export default CommunityPage;
