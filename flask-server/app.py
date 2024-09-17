@@ -63,6 +63,10 @@ def add_topic():
     topics_collection.insert_one({'topic':topics})
     return topics
 
+@app.route('/topic/get', methods=['GET'])
+def get_topic():
+    tpc = topics_collection.find()
+    return tpc 
 
 @app.route('/community/create', methods=['POST'])
 def create_post():
