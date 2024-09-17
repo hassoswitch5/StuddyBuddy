@@ -117,6 +117,15 @@ code {
   width: 100%;
   box-sizing: border-box;
 }
+.reply-item {
+  background-color: #fff; /* Same as comment background */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
 .delete-button {
   background-color: #ff4d4d;
   color: black;
