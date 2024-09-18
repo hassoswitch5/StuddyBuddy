@@ -76,6 +76,7 @@ code {
   max-width: 600px;
   margin: 30px auto;
   padding: 10px;
+  left: 10 px;
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -115,4 +116,43 @@ code {
   background-color: oldlace;
   width: 100%;
   box-sizing: border-box;
+}
+.delete-button {
+  background-color: #ff4d4d;
+  color: black;
+  padding: 2px ;
+  border-radius: 12px;
+  font-size: 7px;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.delete-reply-button {
+  background-color: #ff4d4d;
+  color: black;
+  padding: 2px ;
+  border-radius: 12px;
+  font-size: 7px;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.file-upload-button {
+  color:black;
+  border: none;
+  padding: 5px 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+.file-link{
+  background-color: grey;
+  color: black;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: small;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin-left: 16px;
 }
