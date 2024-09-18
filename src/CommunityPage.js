@@ -1,28 +1,38 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+// Importing the styling
 import './index.css';
 const CommunityPage = () => {
+  // Extract the topic parameters
   const { topic } = useParams();
+  // Manage the text of the comment being typed
   const [commentText, setCommentText] = useState('');
-  const [comments, setComments] = useState([
-      //{ text:`Are you eager to study ${topic}?`, replies: [], showReplies: false },
-      //{ text: `What do you know about ${topic}?`, replies: [], showReplies: false },
-  ]);
+  // Store the list of comments and their replies
+  const [comments, setComments] = useState([]);
+  // Track which comments have been marked as useful
   const [usefulStates, setUsefulStates] = useState({});
+  // Control visibility of the comment area
   const [isCommentAreaVisible, setCommentAreaVisible] = useState(false);
+  // Which comment is being replied to
   const [replyingTo, setReplyingTo] = useState(null);
-  const [file, setFile] = useState(null);
+  // Manage file uploads with comments
+  const [file, setFile] = useState(null)
+  // Handle sending comment or reply
   const handleSendClick = () => {
     if (commentText.trim() === '' && !file) {
+      // Ensure comments are not empty
       alert('Comment cannot be empty');
       return;
     }
     const updatedComments = [...comments];
+    // Check if replying to an existing comment
     if (replyingTo !== null) {
+      // Ensure replies are not empty
       if (commentText.trim() === '' && !file) {
         alert('Reply cannot be empty');
         return;
       }
+      // Push the reply into the correct comment's replies array
       updatedComments[replyingTo].replies.push({
         text: commentText,
         file,
@@ -36,6 +46,7 @@ const CommunityPage = () => {
         showReplies: false,
       });
     }
+    // Update state with new comments
     setComments(updatedComments);
     setCommentText('');
     setFile(null);
@@ -82,6 +93,7 @@ const CommunityPage = () => {
     updatedComments[index].showReplies = !updatedComments[index].showReplies;
     setComments(updatedComments);
   };
+//buttons
   const renderComment = (comment, index) => (
     <div key={index} className="comment-item">
       <div className="comment-content">
@@ -105,7 +117,7 @@ const CommunityPage = () => {
           className={`useful-button ${usefulStates[index] ? 'active' : ''}`}
           style={{
             backgroundColor: usefulStates[index] ? '#2c94cc' : 'initial',
-            color: usefulStates[index] ? 'white' : 'black',
+            color: 'black',
           }}
         >
           useful
@@ -127,8 +139,10 @@ const CommunityPage = () => {
         <div className="replies-container">
           {comment.replies.map((reply, replyIndex) => (
             <div key={`${index}-${replyIndex}`} className="reply-item">
-              <div className="reply-content">
+              <div className="reply-background">
                 <span>{reply.text}</span>
+              </div>
+              <div className="reply-actions">
                 {reply.file && (
                   <div className="reply-file">
                     <div className="file-link">
@@ -147,12 +161,6 @@ const CommunityPage = () => {
                   }}
                 >
                   useful
-                </button>
-                <button
-                  onClick={() => handleReplyClick(`${index}-${replyIndex}`)}
-                  className="reply-button"
-                >
-                  reply
                 </button>
                 <button
                   onClick={() => handleDeleteCommentClick(index, true, replyIndex)}
