@@ -99,6 +99,12 @@ def get_posts():
 
     return jsonify(posts_list)
 
+@app.route('/community/delete', methods=['DELETE'])
+def delete_post():
+    community_collection.delete_one()
+    return ("post deleted")
+
+
 @app.route('/task/add', methods=['POST'])
 def add_task():
     data = request.json
@@ -109,7 +115,7 @@ def add_task():
 @app.route('/task/get', methods=['GET'])
 def get_task():
     tsk = tasks_collection.find()
-    tasks_list = [{'task': j['task'], '_id': str(j['_id'])}]
+    tasks_list = [{'task': j['task']}]
     for j in tsk:
         return tasks_list
 
