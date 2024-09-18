@@ -10,7 +10,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 .comment-button {
-  background-color: grey;
+  background-color:grey;
   color: black;
   border: none;
   padding: 10px;
@@ -117,8 +117,8 @@ code {
   width: 100%;
   box-sizing: border-box;
 }
-.reply-item {
-  background-color: #fff; /* Same as comment background */
+.reply-background {
+  background-color:#b0b0b0;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 10px;
