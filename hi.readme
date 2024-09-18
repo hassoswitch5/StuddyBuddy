@@ -1,1 +1,55 @@
-fhhfhfhf
+STUDYBUDDY WEBSITE
+
+This website is designed to help users connect and study together. 
+It includes various features such as user signup, login, and access to different topics and community pages.
+
+
+FILES'S STRUCTURE
+
+App.js: The main component that sets up routing and renders other components.
+Navbar.js: A navigation bar component for easy access to different routes.
+SignUp.js: A component for user registration.
+Login.js: A component for user login.
+AboutUs.js: Information about the application.
+TopicsPage.js: A page displaying various study topics.
+CommunityPage.js: A page for community discussions based on selected topics.
+todo.js: A component for managing to-do lists.
+
+
+PAGES
+
+Home :Displays a welcome message and a button to sign up.
+About Us :Renders the About Us component.
+Sign Up :Renders the Sign Up form.
+Login :Renders the Login form.
+Topics :Displays available study topics.
+Community :Displays community discussions for the selected topic.
+To-Do List :Renders the To-Do List component.
+
+
+PACKAGES USED
+
+Flask: A web framework for building web applications in Python.
+Flask-CORS: A Flask extension that allows the frontend to communicate with the backend.
+PyMongo: A MongoDB driver for Python that enables interaction with the MongoDB database.
+bcrypt: A library for hashing passwords securely.
+
+
+DATABASE STRUCTURE (MongoDB)
+
+users: Stores user information, including email, passwords, and names.
+community: Contains community posts, including the name, title, description, and associated topic.
+topic: Stores studying topics.
+task: Stores user's tasks.
+
+
+ROUTES
+
+('/topic/add'): it adds a new studying topic that has its own community
+('/topic/get'): it gets the added and saved topics from the database
+('/community/create'): it creates a new post in the community page and saves it in a database
+('/community/get'): it aploads the launched posts that were saved in the database
+('/community/delete'): it deletes the unwanted posts
+('/task/add'): it adds a new task in the todo list
+('/task/add'): it aploads the unfinished tasks
+('/task/delete'): it deletes the finshed or unwanted tasks
