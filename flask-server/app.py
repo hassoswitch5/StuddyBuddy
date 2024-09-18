@@ -100,19 +100,20 @@ def get_posts():
     return jsonify(posts_list)
 
 @app.route('/task/add', methods=['POST'])
-def add_topic():
+def add_task():
     data = request.json
     task = data.get('task')
     tasks_collection.insert_one({'task':task})
     return ({'task': task})
 
 @app.route('/task/get', methods=['GET'])
-def get_topic():
+def get_task():
     tsk = tasks_collection.find()
-    tasks_list = [{'task': j['task'], '_id': str(j['_id'])} for j in tsk]
-    return tasks_list
+    tasks_list = [{'task': j['task'], '_id': str(j['_id'])}]
+    for j in tsk:
+        return tasks_list
 
-@app.route('/tasks/delete', methods=['DELETE'])
+@app.route('/task/delete', methods=['DELETE'])
 def delete_task():
     tasks_collection.delete_one()
     return ("Task deleted")
