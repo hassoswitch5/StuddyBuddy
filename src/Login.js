@@ -39,7 +39,7 @@ const Login = () => {
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleLogin}>
                 <label style={labelStyle}>
-                    Email:
+                    Email :
                     <input
                         type="email"
                         value={email}
@@ -50,7 +50,7 @@ const Login = () => {
                 </label>
                 <br />
                 <label style={labelStyle}>
-                    Password:
+                    Password :
                     <input
                         type="password"
                         value={password}
@@ -69,10 +69,10 @@ const Login = () => {
 };
 
 const containerStyle = {
-    margin: '0 auto',
-    padding: '20px',
+    margin: '50px 400px 20px 450px',
+    padding: '20px 30px 20px 30px',
     maxWidth: '400px',
-    borderRadius: '8px',
+    borderRadius: '10px',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
     backgroundColor: '#ffffff',
 };
@@ -92,7 +92,8 @@ const inputStyle = {
 };
 
 const buttonStyle = {
-    marginTop: '20px',
+    marginTop: '7px',
+    marginLeft:"165px",
     fontSize: '16px',
     backgroundColor: '#2c94cc',
     color: 'white',
@@ -100,6 +101,7 @@ const buttonStyle = {
     borderRadius: '12px',
     padding: '10px 20px',
     cursor: 'pointer',
+
 };
 
 export default Login;

@@ -34,5 +34,69 @@
   }
   to {
     transform: rotate(360deg);
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .header {
+      background-color: #282c34;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .summarizer {
+      width: 100%;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #61dafb;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #21a1f1;
+    }
+
+    .summary {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .footer {
+      background-color: #282c34;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
   }
 }

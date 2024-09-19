@@ -88,8 +88,8 @@ const SignUp = () => {
 };
 
 const containerStyle = {
-    margin: '0 auto',
-    padding: '20px',
+    margin: '50px 400px 20px 450px',
+    padding: '20px 30px 20px 30px',
     maxWidth: '400px',
     borderRadius: '8px',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
@@ -111,7 +111,8 @@ const inputStyle = {
 };
 
 const buttonStyle = {
-    marginTop: '20px',
+    marginTop: '7px',
+    marginLeft:"165px",
     fontSize: '16px',
     backgroundColor: '#2c94cc',
     color: 'white',

@@ -6,7 +6,8 @@ import Login from './Login';
 import AboutUs from './AboutUs';
 import TopicsPage from './TopicsPage';
 import CommunityPage from './CommunityPage';
-import Todo from "./todo";
+import TodoList from "./TodoList";
+import Summarizer from "./sum";
 
 function App() {
     const gradientStyle = {
@@ -95,7 +96,8 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/topics" element={<TopicsPage />} />
                     <Route path="/community/:topic" element={<CommunityPage />} />
-                    <Route path='todo-list' element={<Todo />} />
+                    <Route path='todo-list' element={<TodoList />} />
+                    <Route path='/sum' element={<Summarizer />} />
 
                 </Routes>
             </div>
