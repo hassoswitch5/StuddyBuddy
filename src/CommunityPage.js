@@ -69,6 +69,32 @@ const CommunityPage = () => {
             alert('Reply cannot be empty');
             return;
         }
+        const handleUsefulComment = (commentId, action) => {
+            fetch(`/comments/${commentId}/like`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                    // Update the UI accordingly
+                });
+        };
+
+        const handleUsefulReply = (commentId, replyId, action) => {
+            fetch(`/comments/${commentId}/replies/${replyId}/like`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                    // Update the UI accordingly
+                });
+        };
+
 
         const response = await fetch(`http://localhost:5000/comments/${commentId}/reply`, {
             method: 'POST',

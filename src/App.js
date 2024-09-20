@@ -8,6 +8,7 @@ import TopicsPage from './TopicsPage';
 import CommunityPage from './CommunityPage';
 import TodoList from "./TodoList";
 import Summarizer from "./sum";
+import Quiz from "./quiz";
 
 function App() {
     const gradientStyle = {
@@ -84,12 +85,17 @@ function App() {
                                         Sign Up
                                     </Link>
                                 </button>
+                                <div>
+                                
+                                </div>
                             </div>
                             <div style={imageStyle}>
                                 <img src='foxblue.png' alt="Hi"
                                      style={{ width: '75%', maxWidth: '500px', height: 'auto' }} />
                             </div>
+
                         </div>
+
                     } />
                     <Route path="/about-us" element={<AboutUs />} />
                     <Route path="/signup" element={<SignUp />} />
@@ -98,6 +104,7 @@ function App() {
                     <Route path="/community/:topic" element={<CommunityPage />} />
                     <Route path='todo-list' element={<TodoList />} />
                     <Route path='/sum' element={<Summarizer />} />
+                    <Route path='/quiz' element={<Quiz />} />
 
                 </Routes>
             </div>
