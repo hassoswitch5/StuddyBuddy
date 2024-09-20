@@ -9,6 +9,7 @@ import CommunityPage from './CommunityPage';
 import TodoList from "./TodoList";
 import Summarizer from "./sum";
 import Quiz from "./quiz";
+import Quote from './Qoutes'
 
 function App() {
     const gradientStyle = {
@@ -105,7 +106,7 @@ function App() {
                     <Route path='todo-list' element={<TodoList />} />
                     <Route path='/sum' element={<Summarizer />} />
                     <Route path='/quiz' element={<Quiz />} />
-
+                    <Route path='Qoutes' element={<Quote/>} />
                 </Routes>
             </div>
         </Router>
