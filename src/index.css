@@ -10,7 +10,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 .comment-button {
-  background-color: grey;
+  background-color:grey;
   color: black;
   border: none;
   padding: 10px;
@@ -114,6 +114,15 @@ code {
   border: 1px solid #ddd;
   border-radius: 10px;
   background-color: oldlace;
+  width: 100%;
+  box-sizing: border-box;
+}
+.reply-background {
+  background-color:#b0b0b0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 5px;
   width: 100%;
   box-sizing: border-box;
 }
