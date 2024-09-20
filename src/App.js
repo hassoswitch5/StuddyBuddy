@@ -7,6 +7,7 @@ import Login from './Login'; // Import the Login component
 import AboutUs from './AboutUs'; // Import the AboutUs component
 import TopicsPage from './TopicsPage'; // Import the TopicsPage component
 import CommunityPage from './CommunityPage'; // Import the CommunityPage component
+import Testpage from './test';
 
 function App() {
     const gradientStyle = {
@@ -85,6 +86,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/topics" element={<TopicsPage />} />
                     <Route path="/community/:topic" element={<CommunityPage />} />
+                    <Route path="/test" element={<Testpage/>}/>
                 </Routes>
             </div>
         </Router>
