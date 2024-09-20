@@ -3,13 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@huggingface/transformers": "^3.0.0-alpha.15",
+    "@mui/material": "^6.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.7.7",
+    "bootstrap": "^5.3.3",
+    "compromise": "^14.14.0",
+    "core-js": "^3.38.1",
+    "mdb-react-ui-kit": "^8.0.0",
+    "node-fetch": "^3.3.2",
+    "node-summarizer": "^1.0.7",
+    "openai": "^4.61.1",
+    "os": "^0.1.2",
     "react": "^18.3.1",
+    "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^6.26.2",
     "react-scripts": "5.0.1",
+    "sbd": "^1.0.19",
+    "text-summarization": "^1.0.4",
+    "text-summary": "^2.0.4",
+    "textrank": "^1.0.5",
+    "use-react-summary": "^1.1.6",
+    "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -35,5 +56,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.11"
   }
 }

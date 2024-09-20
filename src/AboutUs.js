@@ -6,6 +6,7 @@ const AboutUs = () => {
         <div style={mainContentStyle}>
             <div style={textStyle}>
                 <h2>About Us</h2>
+                <b>
                 <p style={{ fontSize: '18px', lineHeight: '1.6' }}>
                     Welcome to StuddyBuddy! We are a passionate team dedicated to helping students achieve their academic goals. Our platform provides a supportive community and useful tools to enhance your study habits and productivity.
                 </p>
@@ -15,6 +16,7 @@ const AboutUs = () => {
                 <p style={{ fontSize: '18px', lineHeight: '1.6' }}>
                     Thank you for being a part of our community. We look forward to supporting you on your academic journey!
                 </p>
+                </b>
             </div>
 
             <div style={imageStyle}>
