@@ -167,23 +167,29 @@ def add_reply(id):
 def get_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-@app.route('/studyingtechnique/get', methods=['GET'])
+@app.route('/studyingtechnique/get', methods=['POST'])
 def studying_technique():
-    A = request.args.get('A')
-    B = request.args.get('B')
-    C = request.args.get('C')
+    response = list(request.json)
+    A = response.count("A")
+    B = response.count("B")
+    C=response.count("C")
+
+
+    
     if A>=3:
-        return ("your studying technique is sq3r")
+        return jsonify("your studying technique is sq3r"), 200
     elif B>=3:
-        return ("your studying technique is retrieval practice")
+        return jsonify("your studying technique is retrieval practice"), 200
     elif C>=3:
-        return ("your studying technique is spaced practice")
+        return jsonify("your studying technique is spaced practice"), 200
     elif A==2 and B==2:
-        return ("your studying techniques are sq3r and retrieval practice")
+        return jsonify("your studying techniques are sq3r and retrieval practice"), 200
     elif C==2 and B==2:
-        return ("your studying techniques are retrieval and spaced practice")
+        return jsonify("your studying techniques are retrieval and spaced practice"), 200
     elif A==2 and C==2:
-        return ("your studying techniques are sq3r and spaced practice")
+        return jsonify("your studying techniques are sq3r and spaced practice"), 200
+    else:
+        return jsonify("your studying technique is sq3r"), 200
     
 if __name__ == '__main__':
     app.run(debug=True)

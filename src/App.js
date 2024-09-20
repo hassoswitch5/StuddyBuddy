@@ -10,6 +10,7 @@ import TodoList from "./TodoList";
 import Summarizer from "./sum";
 import Quiz from "./quiz";
 import Quote from './Qoutes'
+import Testpage from './test';
 
 function App() {
     const gradientStyle = {
@@ -107,6 +108,7 @@ function App() {
                     <Route path='/sum' element={<Summarizer />} />
                     <Route path='/quiz' element={<Quiz />} />
                     <Route path='Qoutes' element={<Quote/>} />
+                    <Route path= '/test' element = {<Testpage/>}/>
                 </Routes>
             </div>
         </Router>

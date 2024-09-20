@@ -68,6 +68,10 @@ const MyNavbar = () => {
                     <li><Link to="/about-us" style={navLinkStyle}>About Us</Link></li>
                     <li><a href="/sum" style={navLinkStyle}>summarizing</a></li>
                     <li><a href="/todo-List" style={navLinkStyle}>to do list</a></li>
+                    <li><a href="/Qoutes" style={navLinkStyle}>Quote</a></li>
+                    <li><a href="/test" style={navLinkStyle}>Test</a></li>
+                    
+                    
                 </ul>
                 <Link to="/signup" style={buttonStyle}>Sign Up</Link>
                 <Link to="/login" style={{ ...buttonStyle, marginLeft: '10px' }}>Login</Link>
