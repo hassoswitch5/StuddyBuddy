@@ -14,6 +14,8 @@ import Home3 from './home3';
 import Home4 from './home4';
 // import Quote from './Qoutes';
 import "../src/App2.css"
+import Quiz from "./quiz";
+import Quote from './Qoutes'
 
 function App() {
     const gradientStyle = {
