@@ -62,14 +62,14 @@ def add_topic():
     data = request.json
     topic = data.get('topic')
     topics_collection.insert_one({'topic':topic})
-    return ({'topic': topic})
+    return jsonify({'topic': topic})
 
 @app.route('/topic/get', methods=['GET'])
 def get_topic():
     tpc = topics_collection.find()
     topics_list = [{'topic': i['topic']}]
     for i in tpc:
-        return topics_list
+        return jsonify(topics_list)
 
 @app.route('/community/create', methods=['POST'])
 def create_post():
@@ -82,7 +82,7 @@ def create_post():
         return jsonify({'error': 'name, title, topic and description are required'}), 400
     
     community_collection.insert_one({'name': nam, 'title': title, 'description': description, 'topic':topic})
-    return ('Post created successfully')
+    return jsonify('Post created successfully')
 
 @app.route('/community/get', methods=['GET'])
 def get_posts():
@@ -102,7 +102,7 @@ def get_posts():
 @app.route('/community/delete', methods=['DELETE'])
 def delete_post():
     community_collection.delete_one()
-    return ("post deleted")
+    return jsonify("post deleted")
 
 
 @app.route('/task/add', methods=['POST'])
@@ -110,19 +110,37 @@ def add_task():
     data = request.json
     task = data.get('task')
     tasks_collection.insert_one({'task':task})
-    return ({'task': task})
+    return jsonify({'task': task})
 
 @app.route('/task/get', methods=['GET'])
 def get_task():
     tsk = tasks_collection.find()
     tasks_list = [{'task': j['task']}]
     for j in tsk:
-        return tasks_list
+        return jsonify(tasks_list)
 
 @app.route('/task/delete', methods=['DELETE'])
 def delete_task():
     tasks_collection.delete_one()
-    return ("Task deleted")
+    return jsonify("Task deleted")
 
+@app.route('/studyingtechnique/get', methods=['GET'])
+def studying_technique():
+    A = request.args.get('A')
+    B = request.args.get('B')
+    C = request.args.get('C')
+    if A>=3:
+        return ("your studying technique is sq3r")
+    elif B>=3:
+        return ("your studying technique is retrieval practice")
+    elif C>=3:
+        return ("your studying technique is spaced practice")
+    elif A==2 and B==2:
+        return ("your studying techniques are sq3r and retrieval practice")
+    elif C==2 and B==2:
+        return ("your studying techniques are retrieval and spaced practice")
+    elif A==2 and C==2:
+        return ("your studying techniques are sq3r and spaced practice")
+    
 if __name__ == '__main__':
     app.run(debug=True)
