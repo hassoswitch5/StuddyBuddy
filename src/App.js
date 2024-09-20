@@ -8,7 +8,12 @@ import TopicsPage from './TopicsPage';
 import CommunityPage from './CommunityPage';
 import TodoList from "./TodoList";
 import Summarizer from "./sum";
-import Quiz from "./quiz";
+import Home from './home';
+import Home2 from './home2';
+import Home3 from './home3';
+import Home4 from './home4';
+// import Quote from './Qoutes';
+import "../src/App2.css"
 
 function App() {
     const gradientStyle = {
@@ -51,13 +56,18 @@ function App() {
         textAlign: 'center'
     };
 
+
+
+    
+
     return (
         <Router>
             <div className="App" style={gradientStyle}>
                 <MyNavbar />
+                
                 <Routes>
                     <Route path="/" element={
-                        <div className="container mt-4" style={mainContentStyle}>
+                        <><><><><div className="container mt-4" style={mainContentStyle}>
                             <div style={textStyle}>
                                 <h1 style={{ marginTop: '0.1px', fontWeight: 'bold', fontSize: '75px' }}>
                                     StudyBuddy
@@ -70,7 +80,7 @@ function App() {
                                 </h6>
                                 <button style={{
                                     marginTop: '30px',
-                                    marginBottom: '50px',  // Add space below the button
+                                    marginBottom: '50px', // Add space below the button
                                     fontSize: '20px',
                                     backgroundColor: '#2c94cc',
                                     color: 'white',
@@ -86,17 +96,23 @@ function App() {
                                     </Link>
                                 </button>
                                 <div>
-                                
+
                                 </div>
                             </div>
                             <div style={imageStyle}>
                                 <img src='foxblue.png' alt="Hi"
-                                     style={{ width: '75%', maxWidth: '500px', height: 'auto' }} />
+                                    style={{ width: '75%', maxWidth: '500px', height: 'auto' }} />
+
                             </div>
+
 
                         </div>
 
-                    } />
+                            <Home /></><Home2 /></><Home3 /></><Home4 /></>
+                    }
+
+                    
+                    />
                     <Route path="/about-us" element={<AboutUs />} />
                     <Route path="/signup" element={<SignUp />} />
                     <Route path="/login" element={<Login />} />
@@ -104,11 +120,20 @@ function App() {
                     <Route path="/community/:topic" element={<CommunityPage />} />
                     <Route path='todo-list' element={<TodoList />} />
                     <Route path='/sum' element={<Summarizer />} />
-                    <Route path='/quiz' element={<Quiz />} />
+                    <Route path='/home' element={<Home />} />
+                    <Route path='/home2' element={<Home2 />} />
+                    <Route path='/home3' element={<Home3 />} />
+                    <Route path='/home4' element={<Home4 />} />
+                    {/* <Route path="Qoutes" element={<Quote/>} /> */}
 
                 </Routes>
             </div>
+
         </Router>
+
+
+
+
     );
 }
 
