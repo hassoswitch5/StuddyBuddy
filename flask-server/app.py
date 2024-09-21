@@ -137,7 +137,7 @@ def create_post():
     text = data.get('text')
     topic= data.get('topic')
     if not file or not text or not topic:
-        return jsonify({'error': 'file, text, topic and are required'}), 400
+        return jsonify({'error': 'file, text, and topic are required'}), 400
     
     community_collection.insert_one({'file': file, 'text': text, 'topic':topic})
     return jsonify('Post created successfully')
