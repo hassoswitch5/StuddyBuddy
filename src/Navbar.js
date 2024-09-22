@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const MyNavbar = () => {
     const navbarStyle = {
-        backgroundColor: '#95cde6',
+        backgroundColor: 'transparent',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',

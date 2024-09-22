@@ -1,0 +1,6 @@
+POST http://localhost:5000/generate-quiz
+Content-Type: application/json
+
+{
+ "Addie Viola Smith (1893–1975) was an American attorney who served as the U.S. trade commissioner to Shanghai from 1928 to 1939, the first female Foreign Service officer in the U.S. Foreign Service to work under the Commerce Department, and the first woman to serve as trade commissioner. A native of Stockton, California, Smith moved to Washington, D.C., in 1917. While working for the United States Department of Labor, she attended the Washington College of Law part-time, earning a Bachelor of Laws degree in 1920. She joined the Foreign Service in October that year. Posted to Beijing as a clerk, she was promoted to assistant trade commissioner in Shanghai in 1922, and to trade commissioner in 1928. She later held roles in the U.S. government, world organizations, and the United Nations. Smith met her life partner, Eleanor Mary Hinder, in 1926; they moved to Hinder's native Australia in 1957, where stone seats are dedicated to them at the E. G. Waterhouse National Camellia Gardens"
+}

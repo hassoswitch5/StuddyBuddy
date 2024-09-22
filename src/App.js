@@ -7,7 +7,7 @@ import AboutUs from './AboutUs';
 import TopicsPage from './TopicsPage';
 import CommunityPage from './CommunityPage';
 import TodoList from "./TodoList";
-import Summarizer from "./sum";
+import Summarize from "./sum";
 import Home from './home';
 import Home2 from './home2';
 import Home3 from './home3';
@@ -15,7 +15,9 @@ import Home4 from './home4';
 // import Quote from './Qoutes';
 import "../src/App2.css"
 import Quiz from "./quiz";
-import Quote from './Qoutes'
+// import Quote from './Qoutes'
+import './App.css'
+import StuddyPlan from "./StuddyPlan";
 
 function App() {
     const gradientStyle = {
@@ -60,13 +62,13 @@ function App() {
 
 
 
-    
+
 
     return (
         <Router>
             <div className="App" style={gradientStyle}>
                 <MyNavbar />
-                
+
                 <Routes>
                     <Route path="/" element={
                         <><><><><div className="container mt-4" style={mainContentStyle}>
@@ -93,7 +95,7 @@ function App() {
                                     textAlign: 'center',
                                     display: 'inline-block'
                                 }}>
-                                    <Link to="/signup" style={{ color: 'inherit', textDecoration: 'none' }}>
+                                    <Link to="/signup" style={{ color: '#3c5d78', textDecoration: 'none' }}>
                                         Sign Up
                                     </Link>
                                 </button>
@@ -103,7 +105,7 @@ function App() {
                             </div>
                             <div style={imageStyle}>
                                 <img src='foxblue.png' alt="Hi"
-                                    style={{ width: '75%', maxWidth: '500px', height: 'auto' }} />
+                                     style={{ width: '75%', maxWidth: '500px', height: 'auto' }} />
 
                             </div>
 
@@ -113,7 +115,7 @@ function App() {
                             <Home /></><Home2 /></><Home3 /></><Home4 /></>
                     }
 
-                    
+
                     />
                     <Route path="/about-us" element={<AboutUs />} />
                     <Route path="/signup" element={<SignUp />} />
@@ -121,11 +123,12 @@ function App() {
                     <Route path="/topics" element={<TopicsPage />} />
                     <Route path="/community/:topic" element={<CommunityPage />} />
                     <Route path='todo-list' element={<TodoList />} />
-                    <Route path='/sum' element={<Summarizer />} />
+                    <Route path='/sum' element={<Summarize />} />
                     <Route path='/home' element={<Home />} />
-                    <Route path='/home2' element={<Home2 />} />
+                    <Route path='/Quiz' element={<Quiz />} />
                     <Route path='/home3' element={<Home3 />} />
                     <Route path='/home4' element={<Home4 />} />
+                    <Route path='/StuddyPlan' element={< StuddyPlan/>} />
                     {/* <Route path="Qoutes" element={<Quote/>} /> */}
 
                 </Routes>
