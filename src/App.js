@@ -73,13 +73,19 @@ function App() {
                     <Route path="/" element={
                         <><><><><div className="container mt-4" style={mainContentStyle}>
                             <div style={textStyle}>
+                            <br></br>
+                            <br></br>
+                            <br></br>
                                 <h1 style={{ marginTop: '0.1px', fontWeight: 'bold', fontSize: '75px' }}>
                                     StudyBuddy
                                 </h1>
-                                <h6 style={{ marginTop: '3px', fontWeight: 'bold' }}>
+
+                            <br></br>
+                            <br></br>
+                                <h6 style={{ marginTop: '3px', fontWeight: '500' }}>
                                     Are you a new Buddy? Click the button below
                                 </h6>
-                                <h6 style={{ fontWeight: 'bold' }}>
+                                <h6 style={{ fontWeight: '500' }}>
                                     to sign up and become a studying buddy
                                 </h6>
                                 <button style={{
@@ -95,7 +101,7 @@ function App() {
                                     textAlign: 'center',
                                     display: 'inline-block'
                                 }}>
-                                    <Link to="/signup" style={{ color: '#3c5d78', textDecoration: 'none' }}>
+                                    <Link to="/signup" style={{ color: 'white', textDecoration: 'none' }}>
                                         Sign Up
                                     </Link>
                                 </button>
@@ -104,8 +110,12 @@ function App() {
                                 </div>
                             </div>
                             <div style={imageStyle}>
+                            <br></br>
+            <br></br>
+            <br></br>
+
                                 <img src='foxblue.png' alt="Hi"
-                                     style={{ width: '75%', maxWidth: '500px', height: 'auto' }} />
+                                    style={{ width: '75%', maxWidth: '500px', height: 'auto' }} />
 
                             </div>
 

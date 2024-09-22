@@ -15,6 +15,17 @@ const Home = () => {
             <br></br>
             <br></br>
             <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+
+
 
             <h1>
                 Community
@@ -36,11 +47,10 @@ const Home = () => {
                 </p>
                 </td>
                 <td>
-                <img src='R.png' height={340} width={700}></img>
+                <img src='R.png' height={280} width={576} alt='Community'></img>
                 </td>
             </tr>
         </table>
-        <br></br>
         <br></br>
         </div>
     );

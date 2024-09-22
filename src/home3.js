@@ -6,6 +6,8 @@ const Home3 = () => {
     return (
         <div className="App2">
 
+
+
         <h1>
         To do List
         </h1>
@@ -21,13 +23,12 @@ const Home3 = () => {
         </p>
         </td>
         <td>
-            <img src='to.png' width={400} height={400}></img>
+            <img src='to.png' width={280} height={280} alt='to do list'></img>
         </td>
 
 
         </tr>
         </table>
-        <br></br>
         <br></br>
         </div>
     );

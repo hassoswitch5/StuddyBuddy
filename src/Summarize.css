@@ -18,8 +18,10 @@
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
     resize: none;
+    font-family: initial;
+    font-size: 15px;
+    font-weight: 400;
 }
 
 .quiz-button {
@@ -57,4 +59,7 @@
     background-color: #e7f1ff;
     border-radius: 4px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+div{
+    text-align: center;
 }

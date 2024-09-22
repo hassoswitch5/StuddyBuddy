@@ -21,17 +21,22 @@ const Quiz = () => {
     };
 
     return (
+        <><br></br><br></br><br></br>
         <div className="quiz-container">
+
+            <br></br>
             <h1>Quiz Generator</h1>
+            <br></br>
+            <br></br>
             <form onSubmit={handleSubmit} className="quiz-form">
                 <textarea
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     placeholder="Enter text here..."
-                    rows="4"
+                    rows="10"
                     cols="50"
-                    className="quiz-textarea"
-                />
+                    className="quiz-textarea" />
+                <br></br><br></br>
                 <button type="submit" className="quiz-button">Generate Quiz</button>
             </form>
             {error && <p className="error-message">{error}</p>}
@@ -45,7 +50,7 @@ const Quiz = () => {
                     </ul>
                 </div>
             )}
-        </div>
+        </div></>
     );
 };
 

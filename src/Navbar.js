@@ -64,8 +64,8 @@ const MyNavbar = () => {
             </Link>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <ul style={navLinksStyle}>
-                    <li><Link to="/quiz" style={navLinkStyle}>Home</Link></li>
                     <li><Link to="/about-us" style={navLinkStyle}>About Us</Link></li>
+                    <li><Link to="/quiz" style={navLinkStyle}>Quiz</Link></li>
                     <li><a href="/sum" style={navLinkStyle}>summarizing</a></li>
                     <li><a href="/todo-List" style={navLinkStyle}>to do list</a></li>
                 </ul>

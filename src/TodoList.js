@@ -67,7 +67,12 @@ const TodoList = () => {
     return (
         <div className="todo-container">
             <h1>To-Do List</h1>
+            <br></br>
+            <br></br>
+            <br></br>
             <button className="btn btn-primary" onClick={() => setShowAddModal(true)}>Add Todo</button>
+            <br></br>
+            <br></br>
             <div className="todo-section">
                 <h2>Pending Tasks</h2>
                 <ul className="todo-list">

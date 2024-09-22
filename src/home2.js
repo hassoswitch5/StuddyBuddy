@@ -9,6 +9,8 @@ const Home2 = () => {
             <br></br>
             <br></br>
 
+
+
         <h1>
             Summarizer
         </h1>
@@ -23,14 +25,13 @@ const Home2 = () => {
         </p>
         </td>
         <td>
-        <img src='rr.png' width={400} height={400}></img>
+        <img src='rr.png' width={290} height={280} alt='Summarizer'></img>
         </td>
 
         </tr>
 
         </table>
 
-        <br></br>
         <br></br>
         </div>
     );

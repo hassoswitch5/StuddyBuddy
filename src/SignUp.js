@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "../src/log&sin.css"
 
 const SignUp = () => {
     const [email, setEmail] = useState('');
@@ -39,47 +40,51 @@ const SignUp = () => {
     };
 
     return (
-        <div style={containerStyle}>
+        <div className='containerStyle'>
             <h2>Sign Up</h2>
+            <br></br>
+            <br></br>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <form onSubmit={handleSignUp}>
-                <label style={labelStyle}>
+                <label className='labelStyle'>
                     Name:
                     <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
-                        style={inputStyle}
+                        className='inputStyle'
                     />
                 </label>
                 <br />
 
 
 
-                <label style={labelStyle}>
+                <label className='labelStyle'>
                     Email:
                     <input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        style={inputStyle}
+                        className='inputStyle'
                     />
                 </label>
                 <br />
-                <label style={labelStyle}>
+                <label className='labelStyle'>
                     Password:
                     <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
-                        style={inputStyle}
+                        className='inputStyle'
                     />
                 </label>
                 <br />
-                <button type="submit" style={buttonStyle}>
+                <br></br>
+                
+                <button type="submit" className='buttonStyle'>
                     Sign Up
                 </button>
             </form>
@@ -87,39 +92,6 @@ const SignUp = () => {
     );
 };
 
-const containerStyle = {
-    margin: '50px 400px 20px 450px',
-    padding: '20px 30px 20px 30px',
-    maxWidth: '400px',
-    borderRadius: '8px',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-    backgroundColor: '#ffffff',
-};
 
-const labelStyle = {
-    display: 'block',
-    marginBottom: '10px',
-    fontSize: '16px',
-};
-
-const inputStyle = {
-    width: '100%',
-    padding: '8px',
-    marginTop: '5px',
-    borderRadius: '4px',
-    border: '1px solid #ddd',
-};
-
-const buttonStyle = {
-    marginTop: '7px',
-    marginLeft:"165px",
-    fontSize: '16px',
-    backgroundColor: '#2c94cc',
-    color: 'white',
-    border: 'none',
-    borderRadius: '12px',
-    padding: '10px 20px',
-    cursor: 'pointer',
-};
 
 export default SignUp;
