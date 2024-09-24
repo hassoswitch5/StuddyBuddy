@@ -1,38 +1,43 @@
-.containerStyle  {
+.containerStyle {
     margin: 50px 400px 20px 550px;
-    padding: 20px 30px 20px 30px;
-    max-width: 400px ;
-    border-Radius: 8px ;
-    box-Shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background-Color: #ffffff;
+    padding: 20px 50px 20px 30px;
+    max-width: 400px;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
 }
 
-.labelStyle  {
-    display: block ;
-    margin-Bottom: 10px ;
-    font-Size: 16px ;
+.labelStyle {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
     text-align: left;
-    
-    
 }
 
-.inputStyle  {
-    width: 100% ;
-    padding: 8px ;
-    margin-Top:5px ;
-    border-Radius: 4px;
+.inputStyle {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
     border: 1px solid #ddd;
 }
 
-.buttonStyle  {
-    margin-Top: 7px;
-    font-Size: 16px;
-    background-Color: #2c94cc;
+.buttonStyle {
+    margin-top: 3px;
+    font-size: 16px;
+    background-color: #2c94cc;
     color: white;
     border: none;
-    border-Radius: 12px;
+    border-radius: 12px;
     padding: 10px 20px;
     cursor: pointer;
-    margin:0 130px ;
+    margin-left: 20px;
+}
 
+h7 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 1.2; /* Improve readability */
+    color: #1b293a;
 }

@@ -21,34 +21,31 @@ const Summarize = () => {
     };
 
     return (
-        <div className="summarize-container">
-            <br></br>
-            <br></br>
-            <h1>Text Summarization</h1>
-            <form onSubmit={handleSubmit} className="summarize-form">
-            <br></br>
-            <br></br>
-            <br></br>
+        <><br /><br /><br />
+            <div className="summarize-container">
+
+                <br />
+                <h1>Text Summarization</h1>
+                <br /><br />
+                <form onSubmit={handleSubmit} className="summarize-form">
                 <textarea
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     placeholder="Enter text here..."
-                                    rows="12"
-                cols="170"
-                    className="summarize-textarea"
-                />
-                            <br></br>
-                            <br></br>
-                <button type="submit" className="summarize-button">Summarize</button>
-            </form>
-            {error && <p className="error-message">{error}</p>}
-            {summary && (
-                <div className="summary-output">
-                    <h2>Summary</h2>
-                    <p>{summary}</p>
-                </div>
-            )}
-        </div>
+                    rows="10"
+                    cols="50"
+                    className="summarize-textarea" />
+                    <br /><br />
+                    <button type="submit" className="summarize-button">Summarize</button>
+                </form>
+                {error && <p className="error-message">{error}</p>}
+                {summary && (
+                    <div className="summary-output">
+                        <h2>Summary</h2>
+                        <p>{summary}</p>
+                    </div>
+                )}
+            </div></>
     );
 };
 

@@ -1,7 +1,11 @@
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(to right, #65c6ec, #c6d7e1);
+  background-size: cover;  /* Make sure the image covers the whole background */
+  background-position: center;  /* Center the image */
+  background-repeat: no-repeat;  /* Prevent repeating */
+   background: linear-gradient(to right, #a2d3e9, #ffffff);
+
 }
 
 .App {
@@ -90,7 +94,6 @@ h6 {
   h1 {
     font-size: 70px;
   }
-
   .cta-button {
     font-size: 18px;
     padding: 10px 20px; /* Adjust padding for medium screens */
@@ -102,21 +105,16 @@ h6 {
     flex-direction: column;
     padding: 20px;
   }
-
   h1 {
     font-size: 60px;
-
   }
-
   h6 {
     font-size: 16px;
   }
-
   .cta-button {
     font-size: 18px;
     padding: 10px 18px;
   }
-
   .hero-image {
     width: 80%;
   }
@@ -126,16 +124,13 @@ h6 {
   h1 {
     font-size: 50px;
   }
-
   h6 {
     font-size: 14px;
   }
-
   .cta-button {
     font-size: 16px;
     padding: 8px 15px;
   }
-
   .hero-image {
     width: 90%;
   }
@@ -145,15 +140,12 @@ h6 {
   .container {
     padding: 10px;
   }
-
   h1 {
     font-size: 40px;
   }
-
   h6 {
     font-size: 12px;
   }
-
   .cta-button {
     font-size: 14px;
     padding: 6px 10px;

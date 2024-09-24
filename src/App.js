@@ -12,52 +12,19 @@ import Home from './home';
 import Home2 from './home2';
 import Home3 from './home3';
 import Home4 from './home4';
+// import Quote from './Qoutes';
 import "../src/App2.css"
 import Quiz from "./quiz";
-import Quote from './Qoutes'
+// import Quote from './Qoutes'
 import './App.css'
 import StuddyPlan from "./StuddyPlan";
+import Page from "./buttonpage";
+
+
 
 function App() {
-    const gradientStyle = {
-        background: 'linear-gradient(to right, #a2d3e9, #ffffff)',
-        height: '100vh',
-        margin: 0,
-        display: 'flex',
-        flexDirection: 'column'
-    };
 
-    const [data, setData] = useState([]);
 
-    useEffect(() => {
-        fetch("/members")
-            .then(res => res.json())
-            .then(data => {
-                setData(data);
-                console.log(data);
-            })
-            .catch(error => console.error('Error fetching data:', error));
-    }, []);
-
-    const mainContentStyle = {
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-        padding: '0 20px'
-    };
-
-    const textStyle = {
-        flex: 1,
-        marginRight: '20px'
-    };
-
-    const imageStyle = {
-        flex: 1,
-        textAlign: 'center'
-    };
 
 
 
@@ -65,13 +32,13 @@ function App() {
 
     return (
         <Router>
-            <div className="App" style={gradientStyle}>
+            <div className="App" >
                 <MyNavbar />
 
                 <Routes>
                     <Route path="/" element={
-                        <><><><><div className="container mt-4" style={mainContentStyle}>
-                            <div style={textStyle}>
+                        <><><><><div className="container mt-4" >
+                            <div >
                             <br></br>
                             <br></br>
                             <br></br>
@@ -108,7 +75,7 @@ function App() {
 
                                 </div>
                             </div>
-                            <div style={imageStyle}>
+                            <div >
                             <br></br>
             <br></br>
             <br></br>
@@ -138,7 +105,8 @@ function App() {
                     <Route path='/home3' element={<Home3 />} />
                     <Route path='/home4' element={<Home4 />} />
                     <Route path='/StuddyPlan' element={< StuddyPlan/>} />
-                    <Route path="Qoutes" element={<Quote/>} />
+                    <Route path='/page' element={< Page/>} />
+                    {/* <Route path="Qoutes" element={<Quote/>} /> */}
 
                 </Routes>
             </div>

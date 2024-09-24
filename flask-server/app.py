@@ -224,35 +224,43 @@ def summarize_text():
         return jsonify({'error': str(e)}), 500
 
 
+
 @app.route('/generate-personalized-study-plan', methods=['POST'])
 def generate_personalized_study_plan():
     data = request.json
 
+    # Extract the necessary information from the request data
     exam_dates = data.get('exam_dates')
     time_commitment = data.get('time_commitment')
     learning_style = data.get('learning_style')
     current_understanding = data.get('current_understanding')
     resources = data.get('resources')
 
+    # Check if all the required fields are provided
     if not exam_dates or not time_commitment:
         return jsonify({'error': 'Exam dates and time commitment are required'}), 400
 
-    # Generate the prompt for the AI model
+    # Create the prompt based on the user's input
     prompt = f"""
     Create a personalized study plan considering the following information:
-    
+
     1. Exam dates: {exam_dates}.
     2. Time commitment: {time_commitment} per week/day.
     3. Learning style: {learning_style}.
     4. Current understanding of subjects: {current_understanding}.
     5. Available resources: {resources}.
-    Prioritize Math and Physics, and focus on the user’s specific needs and challenging areas.
+    
+    Make sure the plan is optimized for success based on the user's preferences, subject difficulty, and key dates.
     """
 
+    # Create an instance of the GenerativeModel
     model = genai.GenerativeModel("gemini-1.5-flash")
 
     try:
+        # Call the model to generate a personalized study plan
         response = model.generate_content(prompt)
+
+        # Check if the response contains text
         if response and hasattr(response, 'text'):
             study_plan = response.text.strip()
             return jsonify({'study_plan': study_plan}), 200

@@ -24,7 +24,7 @@ const Login = () => {
 
             if (response.ok) {
                 sessionStorage.setItem('name',data['name'])
-                navigate('/topics');
+                navigate('/page');
 
             } else {
                 setError(data.error);
@@ -39,7 +39,7 @@ const Login = () => {
             <h2>Login</h2>
             <br></br>
             <br></br>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && <p style={{color: 'red'}}>{error}</p>}
             <form onSubmit={handleLogin}>
                 <label className='labelStyle'>
                     Email :
@@ -51,7 +51,7 @@ const Login = () => {
                         className='inputStyle'
                     />
                 </label>
-                <br />
+                <br/>
                 <label className='labelStyle'>
                     Password :
                     <input
@@ -62,13 +62,20 @@ const Login = () => {
                         className='inputStyle'
                     />
                 </label>
-                <br />
+                <br/>
                 <br></br>
-                
+
                 <button type="submit" className='buttonStyle'>
                     Login
                 </button>
+
             </form>
+            <h7>dont have an account</h7>
+            <div>
+            <a href="/signup" target="_blank" rel="noopener noreferrer" style={{fontSize:"5"}}>
+                Click here to Signup
+            </a>
+            </div>
         </div>
     );
 };
