@@ -13,13 +13,25 @@ code {
   background-color:grey;
   color: black;
   border: none;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: small;
+  padding:15px;
+  border-radius: 10px;
+  font-size:larger;
   text-align: center;
   display: flex;
   align-items: center;
   margin-left: 16px;
+}
+.reply-item {
+  background-color:#b3b3b3;
+  color: black;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: medium;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 .useful-button 
 ,.reply-button{
@@ -31,6 +43,7 @@ code {
   border: none;
   cursor: pointer;
   margin-left: 5px;
+  margin:5px,0;
 }
 .useful-button.active {
   background-color: #1a6a8a;
@@ -87,11 +100,13 @@ code {
   background-color: #2c94cc;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 12px;
+  padding: 15px 25px;
+  border-radius: 16px;
   cursor: pointer;
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-top:5;
+  position:absolute;
+  right:0;
 }
 .reply-to-notice {
   color: white;
@@ -102,11 +117,22 @@ code {
   border-radius: 8px;
 }
 .comments-container {
+  height: 600px;
+  width: 500px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: oldlace;
+  overflow-y: auto;
+  border-radius: 10px;
+  margin: auto;
+}
+.comments-wrapper {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  height: calc(100vh - 200px);
+  border-radius: 10px;
 }
 .replies-container {
   padding: 10px;
@@ -117,21 +143,12 @@ code {
   width: 100%;
   box-sizing: border-box;
 }
-.reply-background {
-  background-color:#b0b0b0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  margin-top: 5px;
-  width: 100%;
-  box-sizing: border-box;
-}
 .delete-button {
   background-color: #ff4d4d;
   color: black;
-  padding: 2px ;
+  padding: 5px 10px ;
   border-radius: 12px;
-  font-size: 7px;
+  font-size: 10px;
   border: none;
   cursor: pointer;
   margin-left: 5px;
@@ -139,9 +156,9 @@ code {
 .delete-reply-button {
   background-color: #ff4d4d;
   color: black;
-  padding: 2px ;
+  padding:5px 10px;
   border-radius: 12px;
-  font-size: 7px;
+  font-size: 10px;
   border: none;
   cursor: pointer;
   margin-left: 5px;
@@ -164,4 +181,8 @@ code {
   display: flex;
   align-items: center;
   margin-left: 16px;
+}
+.comment-link {
+  color:blue;
+  text-decoration: underline;
 }
