@@ -106,9 +106,17 @@ const CommunityPage = () => {
         </button>
         {comment.file && (
           <div className="comment-file">
-            <a href={URL.createObjectURL(comment.file)} target="_blank" rel="noopener noreferrer">
-              Open {comment.file.name}
-            </a>
+            {comment.file.type.startsWith('image/') ? (
+              <img
+                src={URL.createObjectURL(comment.file)}
+                alt={comment.file.name}
+                className="uploaded-image"
+              />
+            ) : (
+              <a href={URL.createObjectURL(comment.file)} target="_blank" rel="noopener noreferrer">
+                Open {comment.file.name}
+              </a>
+            )}
           </div>
         )}
       </div>
@@ -139,12 +147,19 @@ const CommunityPage = () => {
               <span>{reply.text}</span>
               {reply.file && (
                 <div className="reply-file">
-                  <a href={URL.createObjectURL(reply.file)} target="_blank" rel="noopener noreferrer">
-                    Open {reply.file.name}
-                  </a>
+                  {reply.file.type.startsWith('image/') ? (
+                    <img
+                      src={URL.createObjectURL(reply.file)}
+                      alt={reply.file.name}
+                      className="uploaded-image"
+                    />
+                  ) : (
+                    <a href={URL.createObjectURL(reply.file)} target="_blank" rel="noopener noreferrer">
+                      Open {reply.file.name}
+                    </a>
+                  )}
                 </div>
               )}
-              {/* Buttons positioned below the reply text */}
               <div className="button-container">
                 <button
                   onClick={() => handleUsefulClick(`${index}-${replyIndex}`)}
@@ -171,10 +186,12 @@ const CommunityPage = () => {
   return (
     <div className="CommunityPage">
       <div className="main-content">
-        <h1 className="header">Community for {topic}</h1>
-        <button onClick={handleWritePostClick} className="comment-input-button">
-          Write your post
-        </button>
+        <h1 className="header">
+          Community for {topic}
+          <button onClick={handleWritePostClick} className="comment-input-button">
+            Write your post
+          </button>
+        </h1>
       </div>
       {isCommentAreaVisible && (
         <div className="comment-area-container">
@@ -208,7 +225,7 @@ const CommunityPage = () => {
         </div>
       )}
       {comments.length > 0 && !isCommentAreaVisible && (
-        <div className="comments-container" style={{ height: '300px', overflowY: 'auto' }}>
+        <div className="comments-container" style={{ height: '430px', overflowY: 'auto' }}>
           {comments.map((comment, index) => renderComment(comment, index))}
         </div>
       )}

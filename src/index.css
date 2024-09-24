@@ -117,8 +117,8 @@ code {
   border-radius: 8px;
 }
 .comments-container {
-  height: 600px;
-  width: 500px;
+
+  width: 400px;
   overflow-y: auto;
   border: 1px solid #ccc;
   padding: 10px;
@@ -127,20 +127,13 @@ code {
   border-radius: 10px;
   margin: auto;
 }
-.comments-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 200px);
-  border-radius: 10px;
-}
+
 .replies-container {
   padding: 10px;
   margin-top: 10px;
   border: 1px solid #ddd;
   border-radius: 10px;
   background-color: oldlace;
-  width: 100%;
   box-sizing: border-box;
 }
 .delete-button {
@@ -185,4 +178,14 @@ code {
 .comment-link {
   color:blue;
   text-decoration: underline;
+}
+.uploaded-image {
+  max-width: 200px;
+  max-height: 150px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  margin-top: 8px;  
+  border-radius: 4px;
+  margin:outo;
 }
