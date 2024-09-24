@@ -171,10 +171,11 @@ const CommunityPage = () => {
   return (
     <div className="CommunityPage">
       <div className="main-content">
-        <h1 className="header">Community for {topic}</h1>
+        <h1 className="header">Community for {topic}
         <button onClick={handleWritePostClick} className="comment-input-button">
           Write your post
         </button>
+        </h1>
       </div>
       {isCommentAreaVisible && (
         <div className="comment-area-container">
