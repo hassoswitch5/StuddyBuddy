@@ -37,7 +37,6 @@ function App() {
         flex: 1,
         textAlign: 'center'
     };
-
     return (
         <Router>
             <div className="App" style={gradientStyle}>
@@ -77,6 +76,7 @@ function App() {
 
                             <div style={imageStyle}>
                                 <img src='foxblue.png' alt="Hi"
+
                                      style={{ width: '75%', maxWidth: '500px', height: 'auto' }} />
                             </div>
                         </div>
@@ -92,5 +92,4 @@ function App() {
         </Router>
     );
 }
-
 export default App;
