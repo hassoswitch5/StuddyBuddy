@@ -1,27 +1,35 @@
 import React from 'react';
-import { mainContentStyle, textStyle, imageStyle } from './styles';
+import '../src/aboutus.css';
+// import { mainContentStyle, textStyle, imageStyle } from './styles';
 
 const AboutUs = () => {
     return (
-        <div style={mainContentStyle}>
-            <div style={textStyle}>
+        <div className='aboutus'>
+            <table>
+                <tr>
+                    <td>
+            <div >
                 <h2>About Us</h2>
                 <b>
-                <p style={{ fontSize: '18px', lineHeight: '1.6' }}>
+                <p>
                     Welcome to StuddyBuddy! We are a passionate team dedicated to helping students achieve their academic goals. Our platform provides a supportive community and useful tools to enhance your study habits and productivity.
                 </p>
-                <p style={{ fontSize: '18px', lineHeight: '1.6' }}>
+                <p>
                     Our mission is to create a space where students can collaborate, share resources, and stay motivated. Whether you're looking to organize your study schedule, find study partners, or simply get inspired, StuddyBuddy is here to help.
                 </p>
-                <p style={{ fontSize: '18px', lineHeight: '1.6' }}>
+                <p>
                     Thank you for being a part of our community. We look forward to supporting you on your academic journey!
                 </p>
                 </b>
             </div>
-
-            <div style={imageStyle}>
-                <img src='team.jpg' alt='Our Team' style={{ width: '75%', maxWidth: '500px', height: 'auto' }}/>
+            </td>
+            <td>
+            <div>
+                <img src='team.jpg' alt='Our Team'/>
             </div>
+            </td>
+            </tr>
+            </table>
         </div>
     );
 };
