@@ -175,19 +175,13 @@ def studying_technique():
     C=response.count("C")
 
     if A>=3:
-        return jsonify("your studying technique is visual technique (sq3r)"), 200
+        return jsonify(["sq3r"]), 200
     elif B>=3:
-        return jsonify("your studying technique is retrieval practice"), 200
+        return jsonify(["retrieval"]), 200
     elif C>=3:
-        return jsonify("your studying technique is spaced practice"), 200
-    elif A==2 and B==2:
-        return jsonify("your studying techniques are visual and retrieval practice"), 200
-    elif C==2 and B==2:
-        return jsonify("your studying techniques are retrieval and spaced practice"), 200
-    elif A==2 and C==2:
-        return jsonify("your studying techniques are visual and spaced practice"), 200
+        return jsonify(["spaced"]), 200
     else:
-        return jsonify("your studying technique is sq3r"), 200
+        return jsonify(["sq3r"]), 200
     
 if __name__ == '__main__':
     app.run(debug=True)

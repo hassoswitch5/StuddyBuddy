@@ -11,7 +11,7 @@ import Summarizer from "./sum";
 import Quiz from "./quiz";
 import Quote from './Qoutes'
 import Testpage from './test'
-import SQR3method from './SQR3'
+import SQR3method from './sq3r'
 import  Retrieval from './retrieval'
 import Spacedpractice from './spaced'
 
@@ -113,7 +113,7 @@ function App() {
                     <Route path='/quiz' element={<Quiz />} />
                     <Route path='Qoutes' element={<Quote/>} />
                     <Route path= '/test' element = {<Testpage/>}/>
-                    <Route path= '/SQR3' element = {<SQR3method/>}/>
+                    <Route path= '/sq3r' element = {<SQR3method/>}/>
                     <Route path= '/retrieval' element = {<Retrieval/>}/>
                     <Route path= '/spaced' element = {<Spacedpractice/>}/>
                 </Routes>
