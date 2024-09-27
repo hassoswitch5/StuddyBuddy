@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import 'reactjs-popup/dist/index.css';
+// import { Link } from 'react-router-dom';
+// import { Outlet, Link } from "react-router-dom";
+import Spacedpractice from './spaced';
+import Retrieval from './retrieval';
+import SQR3method from './SQR3';
 
-export default function Testpage() {
+
+
+
+function Testpage() {
     const  [selectedValueq1, setSelectedValueq1] =useState()
     const[selectedValueq2, setSelectedValueq2] =useState()
     const  [selectedValueq3, setSelectedValueq3] =useState()
@@ -73,6 +81,7 @@ const questions=[
 
         
                 {<button 
+                
                     onClick={
                         async()=>{
                             if (!selectedValueq1||!selectedValueq2||!selectedValueq3||!selectedValueq4||!selectedValueq5)
@@ -141,3 +150,4 @@ const questions=[
     )
 
 };
+export default Testpage;
