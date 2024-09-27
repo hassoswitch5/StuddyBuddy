@@ -22,13 +22,13 @@ const Quiz = () => {
 
     return (
         <><br></br><br></br><br></br>
-        <div className="quiz-container">
+            <div className="quiz-container">
 
-            <br></br>
-            <h1>Quiz Generator</h1>
-            <br></br>
-            <br></br>
-            <form onSubmit={handleSubmit} className="quiz-form">
+                <br></br>
+                <h1>Quiz Generator</h1>
+                <br></br>
+                <br></br>
+                <form onSubmit={handleSubmit} className="quiz-form">
                 <textarea
                     value={text}
                     onChange={(e) => setText(e.target.value)}
@@ -36,21 +36,21 @@ const Quiz = () => {
                     rows="10"
                     cols="50"
                     className="quiz-textarea" />
-                <br></br><br></br>
-                <button type="submit" className="quiz-button">Generate Quiz</button>
-            </form>
-            {error && <p className="error-message">{error}</p>}
-            {quiz.length > 0 && (
-                <div className="quiz-output">
-                    <h2>Generated Quiz</h2>
-                    <ul className="quiz-list">
-                        {quiz.map((question, index) => (
-                            <li key={index} className="quiz-item">{question}</li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-        </div></>
+                    <br></br><br></br>
+                    <button type="submit" className="quiz-button">Generate Quiz</button>
+                </form>
+                {error && <p className="error-message">{error}</p>}
+                {quiz.length > 0 && (
+                    <div className="quiz-output">
+                        <h2>Generated Quiz</h2>
+                        <ul className="quiz-list">
+                            {quiz.map((question, index) => (
+                                <li key={index} className="quiz-item">{question}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+            </div></>
     );
 };
 

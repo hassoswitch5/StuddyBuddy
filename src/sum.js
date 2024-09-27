@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Summarize.css'; // Import your CSS file for styling
+import './Summarize.css';
 
 const Summarize = () => {
     const [text, setText] = useState('');
@@ -9,7 +9,7 @@ const Summarize = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null);  // Reset any previous errors
+        setError(null);
 
         try {
             const response = await axios.post('http://localhost:5000/summarize-text', { text });
@@ -21,31 +21,34 @@ const Summarize = () => {
     };
 
     return (
-        <><br /><br /><br />
-            <div className="summarize-container">
-
-                <br />
-                <h1>Text Summarization</h1>
-                <br /><br />
-                <form onSubmit={handleSubmit} className="summarize-form">
+        <div className="summarize-container">
+            <br></br>
+            <br></br>
+            <h1>Text Summarization</h1>
+            <form onSubmit={handleSubmit} className="summarize-form">
+                <br></br>
+                <br></br>
+                <br></br>
                 <textarea
                     value={text}
                     onChange={(e) => setText(e.target.value)}
                     placeholder="Enter text here..."
-                    rows="10"
-                    cols="50"
-                    className="summarize-textarea" />
-                    <br /><br />
-                    <button type="submit" className="summarize-button">Summarize</button>
-                </form>
-                {error && <p className="error-message">{error}</p>}
-                {summary && (
-                    <div className="summary-output">
-                        <h2>Summary</h2>
-                        <p>{summary}</p>
-                    </div>
-                )}
-            </div></>
+                    rows="12"
+                    cols="170"
+                    className="summarize-textarea"
+                />
+                <br></br>
+                <br></br>
+                <button type="submit" className="summarize-button">Summarize</button>
+            </form>
+            {error && <p className="error-message">{error}</p>}
+            {summary && (
+                <div className="summary-output">
+                    <h2>Summary</h2>
+                    <p>{summary}</p>
+                </div>
+            )}
+        </div>
     );
 };
 

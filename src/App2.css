@@ -1,28 +1,21 @@
 .App2{
     text-align: center;
-    
     background: linear-gradient(to right, #a2d3e9, #ffffff);
     height: 100vh;
     margin: 0;
     display: flex;
     flex-Direction: column;
 }
-button{
 
-    font-Size: 20px;
-    background-Color: #2c94cc;
-    color: white;
-    border: none;
-    border-Radius: 12px;
-    padding: 10px 20px;
-    cursor: pointer ;
-    text-Align: center ;
-    display: inline-block ;
-    width: 150px;
-    
-    
-}
-p{
+.par2{
     font-size: 20px;
     font-weight: 500;
+    margin-right: 250px;
+
+}
+
+.par{
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 50px;
 }

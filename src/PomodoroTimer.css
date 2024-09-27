@@ -1,0 +1,40 @@
+.pomodoro-timer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+}
+
+.timer {
+    font-size: 100px;
+    margin: 20px 0;
+    color: #1b293a;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    margin-Top: 7px;
+    font-Size: 16px;
+    background-Color: #2c94cc;
+    color: white;
+    border: none;
+    border-Radius: 12px;
+    padding: 20px 75px;
+    cursor: pointer;
+
+
+}
+
+.set-timer {
+    margin-top: 20px;
+    width: 100% ;
+    padding: 8px ;
+    margin-Top:5px ;
+    border-Radius: 4px;
+    border: 1px solid #ddd;
+}

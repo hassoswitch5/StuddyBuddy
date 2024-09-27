@@ -4,7 +4,6 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    text-align: center;
 }
 
 .mainContentStyle  {
@@ -15,9 +14,6 @@
     justify-content: center;
     text-align: center;
     padding: 0 20px;
-    text-align: center;
-    
-
 }
 
 .buttonStyle  {
@@ -28,7 +24,6 @@
     border-radius: 12px;
     padding: 10px 20px;
     cursor: pointer;
-    text-align: center;
 }
 
 .topicContainerStyle  {
@@ -37,7 +32,6 @@
     justify-content: center;
     margin-top: 20px;
     width: 100%;
-    text-align: center;
 }
 
 .input{
@@ -46,5 +40,4 @@
     margin-bottom: 20px;
     border-radius: 8px;
     border: 1px solid;
-    text-align: center;
 }

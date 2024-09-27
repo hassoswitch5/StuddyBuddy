@@ -8,6 +8,8 @@ from werkzeug.utils import secure_filename
 import re
 import google.generativeai as genai
 
+
+
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
@@ -15,6 +17,7 @@ UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'mp4', 'pdf'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 
 MONGO_URI = 'mongodb://localhost:27017'
 client = MongoClient(MONGO_URI)
@@ -30,6 +33,8 @@ def hash_password(password):
 def check_password(stored_password, provided_password):
     return bcrypt.checkpw(provided_password.encode('utf-8'), stored_password)
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -96,7 +101,7 @@ def get_topics():
 def get_todos():
     todos = list(todos_collection.find({}, {'_id': 1, 'text': 1, 'completed': 1}))
     for todo in todos:
-        todo['_id'] = str(todo['_id'])
+        todo['_id'] = str(todo['_id'])  # Convert ObjectId to string
     return jsonify(todos), 200
 
 @app.route('/todo', methods=['POST'])
@@ -129,125 +134,123 @@ def update_todo(id):
         return jsonify({'message': 'Todo updated successfully'}), 200
     return jsonify({'error': 'Todo not found'}), 404
 
-@app.route('/comments/<string:topic>', methods=['GET'])
+@app.route('/comments/<topic>', methods=['GET'])
 def get_comments(topic):
-    comments = list(comments_collection.find({'topic': topic}))
+    comments = list(comments_collection.find({"topic": topic}))
     for comment in comments:
-        comment['_id'] = str(comment['_id'])
+        comment["_id"] = str(comment["_id"])  # Convert ObjectId to string
+        if 'file' in comment and comment['file']:
+            comment['file'] = f"http://localhost:5000/uploads/{os.path.basename(comment['file'])}"  # Add file URL
     return jsonify(comments), 200
 
 @app.route('/comments', methods=['POST'])
-def add_comment():
-    topic = request.form.get('topic')
-    text = request.form.get('text', '')
-    file = request.files.get('file')
+def post_comment():
+    data = request.form
+    topic = data.get("topic")
+    text = data.get("text")
+    file = request.files.get("file")
 
-    if not topic:
-        return jsonify({'error': 'Topic is required'}), 400
-
-    file_url = None
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    file_path = None
+    if file:
+        file_path = os.path.join(UPLOAD_FOLDER, secure_filename(file.filename))
         file.save(file_path)
-        file_url = f"/uploads/{filename}"
 
-    new_comment = {
-        'topic': topic,
-        'text': text,
-        'file': file_url,
-        'replies': []
+    comment = {
+        "topic": topic,
+        "text": text,
+        "file": file_path,
+        "replies": []
+    }
+    comments_collection.insert_one(comment)
+    return jsonify({"message": "Comment added!"}), 201
+
+@app.route('/comments/<id>', methods=['DELETE'])
+def delete_comment(id):
+    result = comments_collection.delete_one({"_id": ObjectId(id)})
+    if result.deleted_count:
+        return jsonify({"message": "Comment deleted!"}), 200
+    return jsonify({"message": "Comment not found!"}), 404
+
+@app.route('/comments/reply', methods=['POST'])
+def post_reply():
+    data = request.form
+    comment_id = data.get("commentId")
+    text = data.get("text")
+    file = request.files.get("file")
+
+    reply = {
+        "text": text,
+        "file": None
     }
 
-    result = comments_collection.insert_one(new_comment)
-    return jsonify({'message': 'Comment added successfully', '_id': str(result.inserted_id)}), 201
+    if file:
+        file_path = os.path.join(UPLOAD_FOLDER, secure_filename(file.filename))
+        file.save(file_path)
+        reply["file"] = file_path
 
-@app.route('/comments/<string:id>', methods=['DELETE'])
-def delete_comment(id):
-    result = comments_collection.delete_one({'_id': ObjectId(id)})
-    if result.deleted_count > 0:
-        return jsonify({'message': 'Comment deleted successfully'}), 200
-    return jsonify({'error': 'Comment not found'}), 404
-
-@app.route('/comments/<string:id>/reply', methods=['POST'])
-def add_reply(id):
-    data = request.json
-    reply_text = data.get('text')
-
-    if not reply_text:
-        return jsonify({'error': 'Reply text is required'}), 400
-
-    result = comments_collection.update_one(
-        {'_id': ObjectId(id)},
-        {'$push': {'replies': {'text': reply_text}}}
+    comments_collection.update_one(
+        {"_id": ObjectId(comment_id)},
+        {"$push": {"replies": reply}}
     )
-    if result.matched_count > 0:
-        return jsonify({'message': 'Reply added successfully'}), 201
-    return jsonify({'error': 'Comment not found'}), 404
+    return jsonify({"message": "Reply added!"}), 201
 
-@app.route('/uploads/<filename>')
+@app.route('/comments/reply/<comment_id>/<reply_index>', methods=['DELETE'])
+def delete_reply(comment_id, reply_index):
+    result = comments_collection.update_one(
+        {"_id": ObjectId(comment_id)},
+        {"$pull": {"replies": {"index": int(reply_index)}}}
+    )
+    if result.modified_count:
+        return jsonify({"message": "Reply deleted!"}), 200
+    return jsonify({"message": "Reply not found!"}), 404
+
+@app.route('/uploads/<filename>', methods=['GET'])
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-
 API_KEY = 'AIzaSyDCobCTV0vpaH-YdDix4k5sWx0JWGNx-pI'  # Ensure you handle this securely in production
 genai.configure(api_key=API_KEY)  # Corrected to use the API_KEY variable directly
-
 @app.route('/generate-quiz', methods=['POST'])
 def generate_quiz():
     data = request.json
     text = data.get('text')
-
     if not text:
         return jsonify({'error': 'Text is required'}), 400
-
     model = genai.GenerativeModel("gemini-1.5-flash")
-
     try:
         # Call the model to generate quiz content
         response = model.generate_content(f"Create a quiz based on the following text: {text}")
-
         # Check if the response contains text
         if response and hasattr(response, 'text'):
             questions = response.text.strip().split('\n')  # Adjust this based on the expected response format
             return jsonify(questions), 200
         else:
             return jsonify({'error': 'No questions generated'}), 500
-
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
 @app.route('/summarize-text', methods=['POST'])
 def summarize_text():
     data = request.json
     text = data.get('text')
-
     if not text:
         return jsonify({'error': 'Text is required'}), 400
-
     model = genai.GenerativeModel("gemini-1.5-flash")
-
     try:
         response = model.generate_content(f"Summarize the following text: {text}")
         summary = response.text.strip()
         return jsonify({'summary': summary}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-
 @app.route('/generate-personalized-study-plan', methods=['POST'])
 def generate_personalized_study_plan():
     data = request.json
-
     exam_dates = data.get('exam_dates')
     time_commitment = data.get('time_commitment')
     learning_style = data.get('learning_style')
     current_understanding = data.get('current_understanding')
     resources = data.get('resources')
-
     if not exam_dates or not time_commitment:
         return jsonify({'error': 'Exam dates and time commitment are required'}), 400
-
     # Generate the prompt for the AI model
     prompt = f"""
     Create a personalized study plan considering the following information:
@@ -259,9 +262,7 @@ def generate_personalized_study_plan():
     5. Available resources: {resources}.
     Prioritize Math and Physics, and focus on the user’s specific needs and challenging areas.
     """
-
     model = genai.GenerativeModel("gemini-1.5-flash")
-
     try:
         response = model.generate_content(prompt)
         if response and hasattr(response, 'text'):
@@ -269,35 +270,26 @@ def generate_personalized_study_plan():
             return jsonify({'study_plan': study_plan}), 200
         else:
             return jsonify({'error': 'No study plan generated'}), 500
-
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/studyingtechnique/get', methods=['GET'])
+@app.route('/studyingtechnique/get', methods=['POST'])
 def studying_technique():
-    try:
-        A = int(request.args.get('A', 0))
-        B = int(request.args.get('B', 0))
-        C = int(request.args.get('C', 0))
-    except ValueError:
-        return jsonify({'error': 'A, B, and C must be valid integers'}), 400
+    response = list(request.json)
+    A = response.count("A")
+    B = response.count("B")
+    C=response.count("C")
 
-    # Compare values and return appropriate studying technique
-    if A >= 3:
-        return "your studying technique is SQ3R"
-    elif B >= 3:
-        return "your studying technique is retrieval practice"
-    elif C >= 3:
-        return "your studying technique is spaced practice"
-    elif A == 2 and B == 2:
-        return "your studying techniques are SQ3R and retrieval practice"
-    elif C == 2 and B == 2:
-        return "your studying techniques are retrieval and spaced practice"
-    elif A == 2 and C == 2:
-        return "your studying techniques are SQ3R and spaced practice"
+    if A>=3:
+        return jsonify(["sq3r"]), 200
+    elif B>=3:
+        return jsonify(["retrieval"]), 200
+    elif C>=3:
+        return jsonify(["spaced"]), 200
     else:
-        return "No dominant studying technique identified"
+        return jsonify(["sq3r"]), 200
+
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=5000)
+    app.run(debug=True)

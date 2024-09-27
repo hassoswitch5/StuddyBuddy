@@ -1,0 +1,12 @@
+.h1{
+    font-size: 55px;
+}
+.home{
+
+    text-align: left;
+    background: linear-gradient(to right, #a2d3e9, #ffffff);
+    margin: 0;
+    display: flex;
+    flex-Direction: column;
+
+}

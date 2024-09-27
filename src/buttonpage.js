@@ -1,7 +1,6 @@
-// Page.js
 import React from 'react';
 import './Buttonpage.css';
-import { FaRegFileAlt, FaQuestionCircle, FaCogs, FaChartBar } from 'react-icons/fa';
+import { FaRegFileAlt, FaQuestionCircle, FaCogs, FaChartBar, FaLightbulb, FaClipboardList, FaClock } from 'react-icons/fa';
 import { Link } from 'react-router-dom'; // Import Link
 
 const Page = () => {
@@ -9,7 +8,11 @@ const Page = () => {
         { title: "Text-Summarizer", text: "Instantly Summarize Text with Our AI-Powered Tool!", icon: <FaRegFileAlt />, link: "/sum" },
         { title: "AI Quiz Generator", text: "Transform Text into Quizzes Instantly with Our AI Quiz Generator!", icon: <FaQuestionCircle />, link: "/Quiz" },
         { title: "Studying Community", text: "Connect, Share, and Grow with Our Engaging Studying Community!", icon: <FaCogs />, link: "/topics" },
-        { title: "To do List", text: "Stay Organized and Achieve More with Our Simple To-Do List Tool!", icon: <FaChartBar />, link: "/todo-list" }
+        { title: "To do List", text: "Stay Organized and Achieve More with Our Simple To-Do List Tool!", icon: <FaChartBar />, link: "/todo-list" },
+        { title: "Study Plan Generator", text: "Create Personalized Study Plans to Maximize Your Learning!", icon: <FaClipboardList />, link: "/StuddyPlan" },
+        { title: "Study Technique Finder", text: "Discover Effective Study Techniques to Enhance Your Learning!", icon: <FaLightbulb />, link: "/test" },
+        { title: "Pomodoro Timer", text: "Boost Your Productivity with Our Pomodoro Timer!", icon: <FaClock />, link: "/PomodoroTimer" },
+        { title: "Positive Quotes", text: "Get Inspired with Daily Positive Quotes!", icon: <FaRegFileAlt />, link: "/Qoutes" }
     ];
 
     return (
