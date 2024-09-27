@@ -11,6 +11,7 @@ const TopicsPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+
         const fetchTopics = async () => {
             try {
                 const response = await axios.get('http://localhost:5000/topics');

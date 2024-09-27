@@ -10,6 +10,7 @@ const TodoList = () => {
     const [todoToDelete, setTodoToDelete] = useState(null);
 
     useEffect(() => {
+
         fetchTodos();
     }, []);
 

@@ -8,6 +8,7 @@ const StudyPlanGenerator = () => {
     const [currentUnderstanding, setCurrentUnderstanding] = useState('');
     const [resources, setResources] = useState('');
     const [studyPlan, setStudyPlan] = useState(null);
+
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 

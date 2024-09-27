@@ -11,6 +11,7 @@ const Topic = ({ topic, onDelete, onClick }) => {
         borderRadius: '12px',
         padding: '10px 20px',
         cursor: 'pointer',
+
     };
 
     const deleteButtonStyle = {

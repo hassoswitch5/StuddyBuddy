@@ -4,7 +4,7 @@ body {
   background-size: cover;  /* Make sure the image covers the whole background */
   background-position: center;  /* Center the image */
   background-repeat: no-repeat;  /* Prevent repeating */
-   background: linear-gradient(to right, #a2d3e9, #ffffff);
+  background: linear-gradient(to right, #a2d3e9, #ffffff);
 
 }
 
@@ -151,3 +151,4 @@ h6 {
     padding: 6px 10px;
   }
 }
+

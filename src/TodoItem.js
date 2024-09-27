@@ -9,6 +9,7 @@ const TodoItem = ({ todo, fetchTodos }) => {
                 headers: { Authorization: localStorage.getItem('token') }
             });
             fetchTodos();
+
         } catch (error) {
             console.error(error);
         }

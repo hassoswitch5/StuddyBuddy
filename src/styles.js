@@ -6,6 +6,7 @@ export const mainContentStyle = {
     justifyContent: 'center',
     textAlign: 'center',
     padding: '0 20px'
+
 };
 
 export const textStyle = {

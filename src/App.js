@@ -44,15 +44,15 @@ function App() {
                     <Route path="/" element={
                         <><><><><div className="container mt-4" >
                             <div >
-                            <br></br>
-                            <br></br>
-                            <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
                                 <h1 style={{ marginTop: '0.1px', fontWeight: 'bold', fontSize: '75px' }}>
                                     StudyBuddy
                                 </h1>
 
-                            <br></br>
-                            <br></br>
+                                <br></br>
+                                <br></br>
                                 <h6 style={{ marginTop: '3px', fontWeight: '500' }}>
                                     Are you a new Buddy? Click the button below
                                 </h6>
@@ -81,12 +81,12 @@ function App() {
                                 </div>
                             </div>
                             <div >
-                            <br></br>
-            <br></br>
-            <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
 
                                 <img src='foxblue.png' alt="Hi"
-                                    style={{ width: '75%', maxWidth: '500px', height: 'auto' }} />
+                                     style={{ width: '75%', maxWidth: '500px', height: 'auto' }} />
 
                             </div>
 

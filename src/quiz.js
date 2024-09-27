@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './Quizz.css'; // Import a CSS file for styles
 
+
 const Quiz = () => {
     const [text, setText] = useState('');
     const [quiz, setQuiz] = useState([]);

@@ -7,6 +7,7 @@ const Summarize = () => {
     const [summary, setSummary] = useState('');
     const [error, setError] = useState(null);
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError(null);

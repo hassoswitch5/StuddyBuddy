@@ -2,6 +2,7 @@ import React from "react";
 const SQR3method=() =>{
     return  (<div>
         <br></br>
+
         <br></br>
         <br></br>
         <br></br>

@@ -9,6 +9,7 @@ const MyNavbar = () => {
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '10px 20px',
+
         position: 'sticky',
         top: 0,
         width: '100%',
