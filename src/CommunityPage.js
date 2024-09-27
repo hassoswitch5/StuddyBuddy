@@ -101,24 +101,24 @@ const CommunityPage = () => {
   const renderComment = (comment, index) => (
     <div key={index} className="comment-item">
       <div className="comment-content">
-        <button className="comment-button" onClick={() => toggleRepliesVisibility(index)}>
-          {comment.text}
-        </button>
-        {comment.file && (
-          <div className="comment-file">
-            {comment.file.type.startsWith('image/') ? (
-              <img
-                src={URL.createObjectURL(comment.file)}
-                alt={comment.file.name}
-                className="uploaded-image"
-              />
-            ) : (
-              <a href={URL.createObjectURL(comment.file)} target="_blank" rel="noopener noreferrer">
-                Open {comment.file.name}
-              </a>
-            )}
+        <div className="comment-container">
+          {comment.file && (
+            <div className="comment-file">
+              {comment.file.type.startsWith('image/') ? (
+                <img src={URL.createObjectURL(comment.file)} alt={comment.file.name} className="uploaded-image" />
+              ) : (
+                <a href={URL.createObjectURL(comment.file)} target="_blank" rel="noopener noreferrer">
+                  Open {comment.file.name}
+                </a>
+              )}
+            </div>
+          )}
+          <div className="comment-text">
+            <button className="comment-button" onClick={() => toggleRepliesVisibility(index)}>
+              {comment.text}
+            </button>
           </div>
-        )}
+        </div>
       </div>
 
       <div className="button-container">
@@ -142,43 +142,44 @@ const CommunityPage = () => {
 
       {comment.showReplies && (
         <div className="replies-container">
-          {comment.replies.map((reply, replyIndex) => (
-            <div key={`${index}-${replyIndex}`} className="reply-item">
-              <span>{reply.text}</span>
-              {reply.file && (
-                <div className="reply-file">
-                  {reply.file.type.startsWith('image/') ? (
-                    <img
-                      src={URL.createObjectURL(reply.file)}
-                      alt={reply.file.name}
-                      className="uploaded-image"
-                    />
-                  ) : (
-                    <a href={URL.createObjectURL(reply.file)} target="_blank" rel="noopener noreferrer">
-                      Open {reply.file.name}
-                    </a>
-                  )}
-                </div>
-              )}
-              <div className="button-container">
-                <button
-                  onClick={() => handleUsefulClick(`${index}-${replyIndex}`)}
-                  className={`useful-button ${usefulStates[`${index}-${replyIndex}`] ? 'active' : ''}`}
-                  style={{
-                    backgroundColor: usefulStates[`${index}-${replyIndex}`] ? '#2c94cc' : 'initial',
-                    color: usefulStates[`${index}-${replyIndex}`] ? 'white' : 'black',
-                  }}
-                >
-                  useful
-                </button>
-                <button onClick={() => handleDeleteCommentClick(index, true, replyIndex)} className="delete-reply-button">
-                  Delete Reply
-                </button>
-              </div>
-            </div>
-          ))}
+          {comment.replies.map((reply, replyIndex) => renderReply(reply, index, replyIndex))}
         </div>
       )}
+    </div>
+  );
+
+  // Helper function to render replies
+  const renderReply = (reply, parentIndex, replyIndex) => (
+    <div key={`${parentIndex}-${replyIndex}`} className="reply-item">
+      <div className="reply-container">
+        {reply.file && (
+          <div className="reply-file">
+            {reply.file.type.startsWith('image/') ? (
+              <img src={URL.createObjectURL(reply.file)} alt={reply.file.name} className="uploaded-image" />
+            ) : (
+              <a href={URL.createObjectURL(reply.file)} target="_blank" rel="noopener noreferrer">
+                Open {reply.file.name}
+              </a>
+            )}
+          </div>
+        )}
+        <span className="reply-text">{reply.text}</span>
+      </div>
+      <div className="button-container">
+        <button
+          onClick={() => handleUsefulClick(`${parentIndex}-${replyIndex}`)}
+          className={`useful-button ${usefulStates[`${parentIndex}-${replyIndex}`] ? 'active' : ''}`}
+          style={{
+            backgroundColor: usefulStates[`${parentIndex}-${replyIndex}`] ? '#2c94cc' : 'initial',
+            color: usefulStates[`${parentIndex}-${replyIndex}`] ? 'white' : 'black',
+          }}
+        >
+          useful
+        </button>
+        <button onClick={() => handleDeleteCommentClick(parentIndex, true, replyIndex)} className="delete-reply-button">
+          Delete Reply
+        </button>
+      </div>
     </div>
   );
 
@@ -234,3 +235,6 @@ const CommunityPage = () => {
 };
 
 export default CommunityPage;
+
+
+
