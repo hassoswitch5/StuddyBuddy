@@ -103,24 +103,34 @@ const CommunityPage = () => {
       <div className="comment-content">
         <div className="comment-container">
           {comment.file && (
-            <div className="comment-file">
+            <div className="comment-file" onClick={() => toggleRepliesVisibility(index)}>
               {comment.file.type.startsWith('image/') ? (
-                <img src={URL.createObjectURL(comment.file)} alt={comment.file.name} className="uploaded-image" />
+                <img 
+                  src={URL.createObjectURL(comment.file)} 
+                  alt={comment.file.name} 
+                  className="uploaded-image" 
+                  onClick={() => toggleRepliesVisibility(index)} // Click handler for image
+                />
               ) : (
-                <a href={URL.createObjectURL(comment.file)} target="_blank" rel="noopener noreferrer">
+                <a 
+                  href={URL.createObjectURL(comment.file)} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent toggling replies when clicking the link
+                    toggleRepliesVisibility(index);
+                  }}
+                >
                   Open {comment.file.name}
                 </a>
               )}
             </div>
           )}
-          <div className="comment-text">
-            <button className="comment-button" onClick={() => toggleRepliesVisibility(index)}>
-              {comment.text}
-            </button>
+          <div className="comment-text" onClick={() => toggleRepliesVisibility(index)}>
+            {comment.text}
           </div>
         </div>
       </div>
-
       <div className="button-container">
         <button
           onClick={() => handleUsefulClick(index)}
@@ -139,7 +149,7 @@ const CommunityPage = () => {
           Delete
         </button>
       </div>
-
+  
       {comment.showReplies && (
         <div className="replies-container">
           {comment.replies.map((reply, replyIndex) => renderReply(reply, index, replyIndex))}
@@ -147,6 +157,7 @@ const CommunityPage = () => {
       )}
     </div>
   );
+  
 
   // Helper function to render replies
   const renderReply = (reply, parentIndex, replyIndex) => (
@@ -235,6 +246,3 @@ const CommunityPage = () => {
 };
 
 export default CommunityPage;
-
-
-
