@@ -12,12 +12,16 @@ import Home from './home';
 import Home2 from './home2';
 import Home3 from './home3';
 import Home4 from './home4';
-import "../src/App2.css"
+import "../src/App2.css";
 import Quiz from "./quiz";
 import Quote from './Qoutes'
-import './App.css'
+import './App.css';
 import StuddyPlan from "./StuddyPlan";
 import PomodoroTimer from "./PomodoroTimer";
+import Testpage from './test'
+import SQR3method from './sq3r'
+import Retrieval from './retrieval'
+import Spacedpractice from './spaced'
 
 function App() {
     const gradientStyle = {
@@ -141,6 +145,10 @@ function App() {
                     <Route path='/StuddyPlan' element={< StuddyPlan/>} />
                     <Route path="Qoutes" element={<Quote/>} />
                     <Route path="PomodoroTimer" element={<PomodoroTimer/>} />
+                    <Route path= '/test' element = {<Testpage />}/>
+                    <Route path= '/sq3r' element = {<SQR3method />}/>
+                    <Route path= '/retrieval' element = {<Retrieval />}/>
+                    <Route path= '/spaced' element = {<Spacedpractice />}/>
 
                 </Routes>
             </div>

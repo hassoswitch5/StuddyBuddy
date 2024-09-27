@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 import os
 from werkzeug.utils import secure_filename
 import re
-import google.generativeai as genai
+# import google.generativeai as genai
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
@@ -179,49 +179,49 @@ def add_reply(id):
     return jsonify({'error': 'Comment not found'}), 404
 
 # Set your API key directly or load it from environment variables
-API_KEY = 'AIzaSyDCobCTV0vpaH-YdDix4k5sWx0JWGNx-pI'  # Ensure you handle this securely in production
-genai.configure(api_key=API_KEY)  # Corrected to use the API_KEY variable directly
+# API_KEY = 'AIzaSyDCobCTV0vpaH-YdDix4k5sWx0JWGNx-pI'  # Ensure you handle this securely in production
+# genai.configure(api_key=API_KEY)  # Corrected to use the API_KEY variable directly
 
-@app.route('/generate-quiz', methods=['POST'])
-def generate_quiz():
-    data = request.json
-    text = data.get('text')
+# @app.route('/generate-quiz', methods=['POST'])
+# def generate_quiz():
+#     data = request.json
+#     text = data.get('text')
 
-    if not text:
-        return jsonify({'error': 'Text is required'}), 400
+#     if not text:
+#         return jsonify({'error': 'Text is required'}), 400
 
-    model = genai.GenerativeModel("gemini-1.5-flash")
+#     model = genai.GenerativeModel("gemini-1.5-flash")
 
-    try:
-        # Call the model to generate quiz content
-        response = model.generate_content(f"Create a quiz based on the following text: {text}")
+    # try:
+    #     # Call the model to generate quiz content
+    #     response = model.generate_content(f"Create a quiz based on the following text: {text}")
 
-        # Check if the response contains text
-        if response and hasattr(response, 'text'):
-            questions = response.text.strip().split('\n')  # Adjust this based on the expected response format
-            return jsonify(questions), 200
-        else:
-            return jsonify({'error': 'No questions generated'}), 500
+    #     # Check if the response contains text
+    #     if response and hasattr(response, 'text'):
+    #         questions = response.text.strip().split('\n')  # Adjust this based on the expected response format
+    #         return jsonify(questions), 200
+    #     else:
+    #         return jsonify({'error': 'No questions generated'}), 500
 
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    # except Exception as e:
+    #     return jsonify({'error': str(e)}), 500
 
-@app.route('/summarize-text', methods=['POST'])
-def summarize_text():
-    data = request.json
-    text = data.get('text')
+# @app.route('/summarize-text', methods=['POST'])
+# def summarize_text():
+#     data = request.json
+#     text = data.get('text')
 
-    if not text:
-        return jsonify({'error': 'Text is required'}), 400
+#     if not text:
+#         return jsonify({'error': 'Text is required'}), 400
 
-    model = genai.GenerativeModel("gemini-1.5-flash")
+#     model = genai.GenerativeModel("gemini-1.5-flash")
 
-    try:
-        response = model.generate_content(f"Summarize the following text: {text}")
-        summary = response.text.strip()
-        return jsonify({'summary': summary}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+#     try:
+#         response = model.generate_content(f"Summarize the following text: {text}")
+#         summary = response.text.strip()
+#         return jsonify({'summary': summary}), 200
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
 
 
 @app.route('/generate-personalized-study-plan', methods=['POST'])
@@ -261,6 +261,23 @@ def generate_personalized_study_plan():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+    
+@app.route('/studyingtechnique/get', methods=['POST'])
+def studying_technique():
+    response = list(request.json)
+    A = response.count("A")
+    B = response.count("B")
+    C=response.count("C")
+
+    if A>=3:
+        return jsonify(["sq3r"]), 200
+    elif B>=3:
+        return jsonify(["retrieval"]), 200
+    elif C>=3:
+        return jsonify(["spaced"]), 200
+    else:
+        return jsonify(["sq3r"]), 200
 
 
 
