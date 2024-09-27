@@ -126,6 +126,7 @@ code {
   overflow-y: auto;
   border-radius: 10px;
   margin: auto;
+  margin-bottom: 8px;
 }
 
 .replies-container {
@@ -135,6 +136,7 @@ code {
   border-radius: 10px;
   background-color: oldlace;
   box-sizing: border-box;
+  margin-bottom:8px;;
 }
 .delete-button {
   background-color: #ff4d4d;
