@@ -20,7 +20,7 @@ code {
   text-align: center;
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: -20px;
   align-items: center;
 }
 .reply-item {
@@ -132,7 +132,7 @@ code {
   margin-bottom: 8px;
 }
 
-.comments-container {
+.replies-container {
   padding: 10px;
   margin-top: 10px;
   border: 1px solid #ddd;
