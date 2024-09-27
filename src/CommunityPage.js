@@ -44,18 +44,23 @@ const CommunityPage = () => {
             return;
         }
 
-        const response = await fetch('http://localhost:5000/comments', {
-            method: 'POST',
-            body: formData,
-        });
+        try {
+            const response = await fetch('http://localhost:5000/comments', {
+                method: 'POST',
+                body: formData,
+            });
 
-        if (response.ok) {
-            setCommentText('');
-            setFile(null);
-            fetchComments();
-        } else {
-            const errorText = await response.text();
-            alert(`Error adding comment: ${errorText}`);
+            if (response.ok) {
+                setCommentText('');
+                setFile(null);
+                fetchComments();
+            } else {
+                const errorText = await response.text();
+                alert(`Error adding comment: ${errorText}`);
+            }
+        } catch (error) {
+            console.error('Error sending comment:', error);
+            alert('Could not send the comment. Please try again later.');
         }
     };
 
@@ -69,59 +74,43 @@ const CommunityPage = () => {
             alert('Reply cannot be empty');
             return;
         }
-        const handleUsefulComment = (commentId, action) => {
-            fetch(`/comments/${commentId}/like`, {
+
+        try {
+            const response = await fetch(`http://localhost:5000/comments/${commentId}/reply`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data.message);
-                    // Update the UI accordingly
-                });
-        };
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text: replyText }),
+            });
 
-        const handleUsefulReply = (commentId, replyId, action) => {
-            fetch(`/comments/${commentId}/replies/${replyId}/like`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ action })
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data.message);
-                    // Update the UI accordingly
-                });
-        };
-
-
-        const response = await fetch(`http://localhost:5000/comments/${commentId}/reply`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ text: replyText }),
-        });
-
-        if (response.ok) {
-            setReplyTexts((prev) => ({ ...prev, [commentId]: '' }));
-            fetchComments();
-        } else {
-            const errorText = await response.text();
-            alert(`Error adding reply: ${errorText}`);
+            if (response.ok) {
+                setReplyTexts((prev) => ({ ...prev, [commentId]: '' }));
+                fetchComments();
+            } else {
+                const errorText = await response.text();
+                alert(`Error adding reply: ${errorText}`);
+            }
+        } catch (error) {
+            console.error('Error sending reply:', error);
+            alert('Could not send the reply. Please try again later.');
         }
     };
 
     const handleDeleteComment = async (id) => {
-        const response = await fetch(`http://localhost:5000/comments/${id}`, {
-            method: 'DELETE',
-        });
+        try {
+            const response = await fetch(`http://localhost:5000/comments/${id}`, {
+                method: 'DELETE',
+            });
 
-        if (response.ok) {
-            fetchComments();
-        } else {
-            alert('Error deleting comment');
+            if (response.ok) {
+                fetchComments();
+            } else {
+                alert('Error deleting comment');
+            }
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+            alert('Could not delete the comment. Please try again later.');
         }
     };
 

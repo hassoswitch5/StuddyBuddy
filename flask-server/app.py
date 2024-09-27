@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from pymongo import MongoClient
 import bcrypt
@@ -43,7 +43,7 @@ def signup():
     if not email or not password or not name:
         return jsonify({'error': 'Email, password, and name are required'}), 400
 
-    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):  # Check for valid email format
+    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):  # Validate email format
         return jsonify({'error': 'Please enter a valid email'}), 400
 
     if users_collection.find_one({'email': email}):
@@ -73,10 +73,12 @@ def login():
 def add_topic():
     data = request.json
     topic = data.get('topic')
-    if topic:
-        topics_collection.insert_one({'topic': topic})
-        return jsonify({'message': 'Topic added successfully'}), 201
-    return jsonify({'error': 'Topic is required'}), 400
+
+    if not topic:
+        return jsonify({'error': 'Topic is required'}), 400
+
+    topics_collection.insert_one({'topic': topic})
+    return jsonify({'message': 'Topic added successfully'}), 201
 
 @app.route('/topic/<string:topic_name>', methods=['DELETE'])
 def delete_topic(topic_name):
@@ -101,11 +103,14 @@ def get_todos():
 def add_todo():
     data = request.json
     text = data.get('text')
-    if text:
-        new_todo = {'text': text, 'completed': False}
-        result = todos_collection.insert_one(new_todo)
-        return jsonify({'message': 'Todo added successfully', '_id': str(result.inserted_id)}), 201
-    return jsonify({'error': 'Todo text is required'}), 400
+
+    if not text:
+        return jsonify({'error': 'Todo text is required'}), 400
+
+    new_todo = {'text': text, 'completed': False}
+    result = todos_collection.insert_one(new_todo)
+
+    return jsonify({'message': 'Todo added successfully', '_id': str(result.inserted_id)}), 201
 
 @app.route('/todo/<string:id>', methods=['DELETE'])
 def delete_todo(id):
@@ -118,6 +123,7 @@ def delete_todo(id):
 def update_todo(id):
     data = request.json
     completed = data.get('completed')
+
     result = todos_collection.update_one({'_id': ObjectId(id)}, {'$set': {'completed': completed}})
     if result.matched_count > 0:
         return jsonify({'message': 'Todo updated successfully'}), 200
@@ -132,15 +138,15 @@ def get_comments(topic):
 
 @app.route('/comments', methods=['POST'])
 def add_comment():
-    topic = request.json.get('topic')
-    text = request.json.get('text', '')
+    topic = request.form.get('topic')
+    text = request.form.get('text', '')
     file = request.files.get('file')
 
     if not topic:
         return jsonify({'error': 'Topic is required'}), 400
 
     file_url = None
-    if file and allowed_file(file.filename) and file.content_length < 2 * 1024 * 1024:  # Limit to 2MB
+    if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         file.save(file_path)
@@ -152,6 +158,7 @@ def add_comment():
         'file': file_url,
         'replies': []
     }
+
     result = comments_collection.insert_one(new_comment)
     return jsonify({'message': 'Comment added successfully', '_id': str(result.inserted_id)}), 201
 
@@ -178,7 +185,11 @@ def add_reply(id):
         return jsonify({'message': 'Reply added successfully'}), 201
     return jsonify({'error': 'Comment not found'}), 404
 
-# Set your API key directly or load it from environment variables
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+
 API_KEY = 'AIzaSyDCobCTV0vpaH-YdDix4k5sWx0JWGNx-pI'  # Ensure you handle this securely in production
 genai.configure(api_key=API_KEY)  # Corrected to use the API_KEY variable directly
 
@@ -224,43 +235,35 @@ def summarize_text():
         return jsonify({'error': str(e)}), 500
 
 
-
 @app.route('/generate-personalized-study-plan', methods=['POST'])
 def generate_personalized_study_plan():
     data = request.json
 
-    # Extract the necessary information from the request data
     exam_dates = data.get('exam_dates')
     time_commitment = data.get('time_commitment')
     learning_style = data.get('learning_style')
     current_understanding = data.get('current_understanding')
     resources = data.get('resources')
 
-    # Check if all the required fields are provided
     if not exam_dates or not time_commitment:
         return jsonify({'error': 'Exam dates and time commitment are required'}), 400
 
-    # Create the prompt based on the user's input
+    # Generate the prompt for the AI model
     prompt = f"""
     Create a personalized study plan considering the following information:
-
+    
     1. Exam dates: {exam_dates}.
     2. Time commitment: {time_commitment} per week/day.
     3. Learning style: {learning_style}.
     4. Current understanding of subjects: {current_understanding}.
     5. Available resources: {resources}.
-    
-    Make sure the plan is optimized for success based on the user's preferences, subject difficulty, and key dates.
+    Prioritize Math and Physics, and focus on the user’s specific needs and challenging areas.
     """
 
-    # Create an instance of the GenerativeModel
     model = genai.GenerativeModel("gemini-1.5-flash")
 
     try:
-        # Call the model to generate a personalized study plan
         response = model.generate_content(prompt)
-
-        # Check if the response contains text
         if response and hasattr(response, 'text'):
             study_plan = response.text.strip()
             return jsonify({'study_plan': study_plan}), 200
@@ -270,6 +273,30 @@ def generate_personalized_study_plan():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/studyingtechnique/get', methods=['GET'])
+def studying_technique():
+    try:
+        A = int(request.args.get('A', 0))
+        B = int(request.args.get('B', 0))
+        C = int(request.args.get('C', 0))
+    except ValueError:
+        return jsonify({'error': 'A, B, and C must be valid integers'}), 400
+
+    # Compare values and return appropriate studying technique
+    if A >= 3:
+        return "your studying technique is SQ3R"
+    elif B >= 3:
+        return "your studying technique is retrieval practice"
+    elif C >= 3:
+        return "your studying technique is spaced practice"
+    elif A == 2 and B == 2:
+        return "your studying techniques are SQ3R and retrieval practice"
+    elif C == 2 and B == 2:
+        return "your studying techniques are retrieval and spaced practice"
+    elif A == 2 and C == 2:
+        return "your studying techniques are SQ3R and spaced practice"
+    else:
+        return "No dominant studying technique identified"
 
 
 if __name__ == '__main__':

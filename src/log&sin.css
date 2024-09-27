@@ -31,13 +31,7 @@
     border-radius: 12px;
     padding: 10px 20px;
     cursor: pointer;
-    margin-left: 20px;
+    margin-left: 75px;
 }
 
-h7 {
-    margin: 0;
-    font-weight: bold;
-    font-size: 10px;
-    line-height: 1.2; /* Improve readability */
-    color: #1b293a;
-}
+
