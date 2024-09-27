@@ -11,10 +11,11 @@ const Home3 = () => {
         <h1>
         To do List
         </h1>
+        <br></br>
         <table>
         <tr>
         <td>
-        <p>
+        <p className='par2'>
         A to-do list for your studies is an essential tool for staying organized and focused. Begin by listing all 
         your subjects and any upcoming assignments, exams, or projects. Break each task into smaller, manageable steps
         to make it less overwhelming. Prioritize tasks based on due dates and importance, and set specific goals for 

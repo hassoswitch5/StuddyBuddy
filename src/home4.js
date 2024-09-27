@@ -8,12 +8,13 @@ const Home4 = () => {
         <h1>
             Test
         </h1>
+        <br></br>
         <table>
             <tr>
                 <td>
 
 
-        <p>
+        <p className='par2'>
         Preparing for a test requires a strategic approach to ensure you understand the material 
         and perform your best. Start by reviewing your class notes and any relevant textbooks, focusing 
         on key concepts and themes. Create a study schedule that allocates time for each subject, breaking 
@@ -24,7 +25,7 @@ const Home4 = () => {
         </p>
 </td>
 <td>
-    <img src='ppp.png ' alt='test' height={280} width={305}></img>
+    <img src='ppp.png ' alt='test' height={280} width={305} ></img>
 </td>
 
 </tr>

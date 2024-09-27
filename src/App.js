@@ -17,6 +17,7 @@ import Quiz from "./quiz";
 import Quote from './Qoutes'
 import './App.css'
 import StuddyPlan from "./StuddyPlan";
+import PomodoroTimer from "./PomodoroTimer";
 
 function App() {
     const gradientStyle = {
@@ -139,6 +140,7 @@ function App() {
                     <Route path='/home4' element={<Home4 />} />
                     <Route path='/StuddyPlan' element={< StuddyPlan/>} />
                     <Route path="Qoutes" element={<Quote/>} />
+                    <Route path="PomodoroTimer" element={<PomodoroTimer/>} />
 
                 </Routes>
             </div>

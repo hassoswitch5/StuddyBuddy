@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Summarize.css'; // Import your CSS file for styling
+import './Summarize.css';
 
 const Summarize = () => {
     const [text, setText] = useState('');
@@ -9,7 +9,7 @@ const Summarize = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError(null);  // Reset any previous errors
+        setError(null);
 
         try {
             const response = await axios.post('http://localhost:5000/summarize-text', { text });

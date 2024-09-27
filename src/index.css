@@ -42,13 +42,13 @@
 .reply-item {
   margin-top: 5px;
   padding: 8px;
-  border-left: 3px solid #007bff; /* Blue left border for replies */
-  background-color: #e9f5ff; /* Light blue background for replies */
+  border-left: 3px solid #007bff;
+  background-color: #e9f5ff;
   border-radius: 4px;
 }
 
 .reply-text {
-  font-style: italic; /* Different style for replies */
+  font-style: italic;
 }
 
 .comment-file, .reply-file {
@@ -56,7 +56,7 @@
 }
 
 .delete-button {
-  margin-left: auto; /* Align delete button to the right */
+  margin-left: auto;
   background-color: #dc3545;
   color: white;
   border: none;
@@ -79,46 +79,46 @@
 }
 
 .uploaded-image {
-  max-width: 300px; /* Adjust this value as needed */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 5px; /* Optional: adds rounded corners */
+  max-width: 300px;
+  height: auto;
+  border-radius: 5px;
 }
 .CommunityPage {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
 }
 
 .main-content {
   flex: 1;
-  overflow-y: auto; /* Allow scrolling */
+  overflow-y: auto;
   padding: 10px;
 }
 
 .input-area {
   padding: 10px;
-  background-color: #f0f0f0; /* Background color for the input area */
-  border-top: 1px solid #ccc; /* Optional: border at the top */
+  background-color: #f0f0f0;
+  border-top: 1px solid #ccc;
   display: flex;
-  flex-direction: column; /* Stack elements vertically */
+  flex-direction: column;
 }
 
 .comment-textarea {
   width: 100%;
-  height: 60px; /* Adjust height as necessary */
-  resize: none; /* Prevent resizing */
-  margin-bottom: 10px; /* Space between elements */
+  height: 60px;
+  resize: none;
+  margin-bottom: 10px;
 }
 
 .button-container {
   display: flex;
-  justify-content: flex-end; /* Align button to the right */
+  justify-content: flex-end;
 }
 
 .uploaded-image {
-  max-width: 150px; /* Set max width for images */
-  height: auto; /* Maintain aspect ratio */
-  border-radius: 5px; /* Optional: add rounded corners */
+  max-width: 150px;
+  height: auto;
+  border-radius: 5px;
 }
 
 
