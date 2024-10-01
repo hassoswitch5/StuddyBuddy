@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../src/topicspage.css';
+import './topicspage.css';
 import Topic from './topic';
 
 const TopicsPage = () => {

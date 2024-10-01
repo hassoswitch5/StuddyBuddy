@@ -1,36 +1,31 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import "../src/log&sin.css"
+import "./log&sin.css"
 
-const SignUp = () => {
-
+const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-
-
-
-
-    const handleSignUp = async (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
 
 
         try {
-            const response = await fetch('http://localhost:5000/signup', {
+            const response = await fetch('http://localhost:5000/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password, name }),
+                body: JSON.stringify({ email, password }),
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                navigate('/login');
+                sessionStorage.setItem('name',data['name'])
+                navigate('/page');
 
             } else {
                 setError(data.error);
@@ -42,27 +37,13 @@ const SignUp = () => {
 
     return (
         <div className='containerStyle'>
-            <h2>Sign Up</h2>
+            <h2>Login</h2>
             <br></br>
             <br></br>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <form onSubmit={handleSignUp}>
+            {error && <p style={{color: 'red'}}>{error}</p>}
+            <form onSubmit={handleLogin}>
                 <label className='labelStyle'>
-                    Name:
-                    <input
-                        type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        className='inputStyle'
-                    />
-                </label>
-                <br />
-
-
-
-                <label className='labelStyle'>
-                    Email:
+                    Email :
                     <input
                         type="email"
                         value={email}
@@ -71,9 +52,9 @@ const SignUp = () => {
                         className='inputStyle'
                     />
                 </label>
-                <br />
+                <br/>
                 <label className='labelStyle'>
-                    Password:
+                    Password :
                     <input
                         type="password"
                         value={password}
@@ -82,17 +63,22 @@ const SignUp = () => {
                         className='inputStyle'
                     />
                 </label>
-                <br />
+                <br/>
                 <br></br>
-                
+
                 <button type="submit" className='buttonStyle'>
-                    Sign Up
+                    Login
                 </button>
+
             </form>
+            <h7>dont have an account</h7>
+            <div>
+            <a href="/signup" target="_blank" rel="noopener noreferrer" style={{fontSize:"5"}}>
+                Click here to Signup
+            </a>
+            </div>
         </div>
     );
 };
 
-
-
-export default SignUp;
+export default Login;

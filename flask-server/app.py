@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 import os
 from werkzeug.utils import secure_filename
 import re
-import google.generativeai as genai
+# import google.generativeai as genai
 
 
 
@@ -208,70 +208,70 @@ def delete_reply(comment_id, reply_index):
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-API_KEY = 'AIzaSyDCobCTV0vpaH-YdDix4k5sWx0JWGNx-pI'  # Ensure you handle this securely in production
-genai.configure(api_key=API_KEY)  # Corrected to use the API_KEY variable directly
-@app.route('/generate-quiz', methods=['POST'])
-def generate_quiz():
-    data = request.json
-    text = data.get('text')
-    if not text:
-        return jsonify({'error': 'Text is required'}), 400
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    try:
-        # Call the model to generate quiz content
-        response = model.generate_content(f"Create a quiz based on the following text: {text}")
-        # Check if the response contains text
-        if response and hasattr(response, 'text'):
-            questions = response.text.strip().split('\n')  # Adjust this based on the expected response format
-            return jsonify(questions), 200
-        else:
-            return jsonify({'error': 'No questions generated'}), 500
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-@app.route('/summarize-text', methods=['POST'])
-def summarize_text():
-    data = request.json
-    text = data.get('text')
-    if not text:
-        return jsonify({'error': 'Text is required'}), 400
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    try:
-        response = model.generate_content(f"Summarize the following text: {text}")
-        summary = response.text.strip()
-        return jsonify({'summary': summary}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-@app.route('/generate-personalized-study-plan', methods=['POST'])
-def generate_personalized_study_plan():
-    data = request.json
-    exam_dates = data.get('exam_dates')
-    time_commitment = data.get('time_commitment')
-    learning_style = data.get('learning_style')
-    current_understanding = data.get('current_understanding')
-    resources = data.get('resources')
-    if not exam_dates or not time_commitment:
-        return jsonify({'error': 'Exam dates and time commitment are required'}), 400
-    # Generate the prompt for the AI model
-    prompt = f"""
-    Create a personalized study plan considering the following information:
+# API_KEY = 'AIzaSyDCobCTV0vpaH-YdDix4k5sWx0JWGNx-pI'  # Ensure you handle this securely in production
+# genai.configure(api_key=API_KEY)  # Corrected to use the API_KEY variable directly
+# @app.route('/generate-quiz', methods=['POST'])
+# def generate_quiz():
+#     data = request.json
+#     text = data.get('text')
+#     if not text:
+#         return jsonify({'error': 'Text is required'}), 400
+#     model = genai.GenerativeModel("gemini-1.5-flash")
+#     try:
+#         # Call the model to generate quiz content
+#         response = model.generate_content(f"Create a quiz based on the following text: {text}")
+#         # Check if the response contains text
+#         if response and hasattr(response, 'text'):
+#             questions = response.text.strip().split('\n')  # Adjust this based on the expected response format
+#             return jsonify(questions), 200
+#         else:
+#             return jsonify({'error': 'No questions generated'}), 500
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
+# @app.route('/summarize-text', methods=['POST'])
+# def summarize_text():
+#     data = request.json
+#     text = data.get('text')
+#     if not text:
+#         return jsonify({'error': 'Text is required'}), 400
+#     model = genai.GenerativeModel("gemini-1.5-flash")
+#     try:
+#         response = model.generate_content(f"Summarize the following text: {text}")
+#         summary = response.text.strip()
+#         return jsonify({'summary': summary}), 200
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
+# @app.route('/generate-personalized-study-plan', methods=['POST'])
+# def generate_personalized_study_plan():
+#     data = request.json
+#     exam_dates = data.get('exam_dates')
+#     time_commitment = data.get('time_commitment')
+#     learning_style = data.get('learning_style')
+#     current_understanding = data.get('current_understanding')
+#     resources = data.get('resources')
+#     if not exam_dates or not time_commitment:
+#         return jsonify({'error': 'Exam dates and time commitment are required'}), 400
+#     # Generate the prompt for the AI model
+#     prompt = f"""
+#     Create a personalized study plan considering the following information:
     
-    1. Exam dates: {exam_dates}.
-    2. Time commitment: {time_commitment} per week/day.
-    3. Learning style: {learning_style}.
-    4. Current understanding of subjects: {current_understanding}.
-    5. Available resources: {resources}.
-    Prioritize Math and Physics, and focus on the user’s specific needs and challenging areas.
-    """
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    try:
-        response = model.generate_content(prompt)
-        if response and hasattr(response, 'text'):
-            study_plan = response.text.strip()
-            return jsonify({'study_plan': study_plan}), 200
-        else:
-            return jsonify({'error': 'No study plan generated'}), 500
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+#     1. Exam dates: {exam_dates}.
+#     2. Time commitment: {time_commitment} per week/day.
+#     3. Learning style: {learning_style}.
+#     4. Current understanding of subjects: {current_understanding}.
+#     5. Available resources: {resources}.
+#     Prioritize Math and Physics, and focus on the user’s specific needs and challenging areas.
+#     """
+#     model = genai.GenerativeModel("gemini-1.5-flash")
+#     try:
+#         response = model.generate_content(prompt)
+#         if response and hasattr(response, 'text'):
+#             study_plan = response.text.strip()
+#             return jsonify({'study_plan': study_plan}), 200
+#         else:
+#             return jsonify({'error': 'No study plan generated'}), 500
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500
 
 @app.route('/studyingtechnique/get', methods=['POST'])
 def studying_technique():

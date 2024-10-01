@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./StuddyBuddy.css";
+import "./Studdyplan.css";
 
 const StudyPlanGenerator = () => {
     const [examDates, setExamDates] = useState('');
