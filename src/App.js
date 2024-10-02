@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import MyNavbar from './Navbar';
-import SignUp from './SignUp';
-import Login from './Login';
-import AboutUs from './AboutUs';
-import TopicsPage from './TopicsPage';
-import CommunityPage from './CommunityPage';
-import TodoList from "./TodoList";
-import Summarize from "./sum";
-import Home from './home';
-import Home2 from './home2';
-import Home3 from './home3';
-import Home4 from './home4';
+import MyNavbar from './Components/Navigation code/Navbar';
+import SignUp from './Components/signinandlogin/SignUp';
+import Login from './Components/signinandlogin/Login';
+import AboutUs from './Components/About us/AboutUs';
+import TopicsPage from './Components/Community/TopicsPage';
+import CommunityPage from './Components/Community/CommunityPage';
+import TodoList from "./Components/TodoList/TodoList";
+import Summarize from "./Components/Summarize/sum";
+import Home from './Components/Home pages/home';
+import Home2 from './Components/Home pages/home2';
+import Home3 from './Components/Home pages/home3';
+import Home4 from './Components/Home pages/home4';
 // import Quote from './Qoutes';
-import "../src/App2.css"
-import Quiz from "./quiz";
-import Quote from './Qoutes'
+import "./App.css"
+import Quiz from "./Components/Quiz/quiz";
+import Quote from './Components/Quotes/Qoutes'
 import './App.css'
-import StuddyPlan from "./StuddyPlan";
-import Page from "./buttonpage";
-import PomodoroTimer from "./PomodoroTimer";
-import Testpage from './test'
-import SQR3method from './sq3r'
-import Retrieval from './retrieval'
-import Spacedpractice from './spaced'
+import StuddyPlan from "./Components/Study plan/StuddyPlan";
+import Page from "./Components/button page/buttonpage";
+import PomodoroTimer from "./Components/pomodoro/PomodoroTimer";
+import Testpage from './Components/Study Techniques/test'
+import SQR3method from './Components/Study Techniques/sq3r'
+import Retrieval from './Components/Study Techniques/retrieval'
+import Spacedpractice from './Components/Study Techniques/spaced'
 
 
 

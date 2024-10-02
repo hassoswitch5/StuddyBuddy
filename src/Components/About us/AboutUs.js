@@ -1,5 +1,5 @@
 import React from 'react';
-import '../src/aboutus.css';
+import './aboutus.css';
 // import { mainContentStyle, textStyle, imageStyle } from './styles';
 
 const AboutUs = () => {

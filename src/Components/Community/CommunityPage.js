@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './index.css';
+import './community.css';
 
 const CommunityPage = () => {
     const { topic } = useParams();

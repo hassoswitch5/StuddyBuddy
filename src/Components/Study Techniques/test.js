@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import './index.css';
 // import { Link } from 'react-router-dom';
 // import { Outlet, Link } from "react-router-dom";
 // import Spacedpractice from './spaced';
 // import Retrieval from './retrieval';
 // import SQR3method from './sq3r';
 import { useNavigate } from "react-router-dom";
-import '../src/test.css';
+import './test.css';
 
 
 
