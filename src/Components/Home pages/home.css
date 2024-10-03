@@ -5,18 +5,8 @@
     margin: 0;
     display: flex;
     flex-Direction: column;
-}
-
-.par2{
-    font-size: 20px;
-    font-weight: 500;
-    margin-right: 250px;
+    font-size:20px ;
 
 }
 
-.par{
-    font-size: 20px;
-    font-weight: 500;
-    margin-right: 50px;
-}
 

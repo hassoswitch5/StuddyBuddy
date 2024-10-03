@@ -4,13 +4,7 @@ import './home.css';
 const Home = () => {
     return (
         <div className="App2">
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
+
             <br></br>
             <br></br>
             <br></br>
