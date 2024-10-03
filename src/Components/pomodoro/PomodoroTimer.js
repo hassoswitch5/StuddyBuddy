@@ -9,12 +9,12 @@ const PomodoroTimer = () => {
 
     useEffect(() => {
         let timer;
-        if (isActive && (minutes > 0 || seconds > 0)) {
+        if (isActive && (minutes >= 0 || seconds > 0)) {
             timer = setInterval(() => {
                 if (seconds === 0) {
                     if (minutes === 0) {
+                        new Audio("sound1.mp3").play();
                         setIsActive(false);
-                        new Audio('/path/to/sound.mp3').play();
                     } else {
                         setMinutes(minutes - 1);
                         setSeconds(59);

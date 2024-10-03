@@ -5,9 +5,7 @@ import './aboutus.css';
 const AboutUs = () => {
     return (
         <div className='aboutus'>
-            <table>
-                <tr>
-                    <td>
+
                         <div >
                             <h2>About Us</h2>
                             <b>
@@ -22,14 +20,6 @@ const AboutUs = () => {
                                 </p>
                             </b>
                         </div>
-                    </td>
-                    <td>
-                        <div>
-                            <img src='team.jpg' alt='Our Team'/>
-                        </div>
-                    </td>
-                </tr>
-            </table>
         </div>
     );
 };
