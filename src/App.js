@@ -24,6 +24,7 @@ import Testpage from './Components/Study Techniques/test'
 import SQR3method from './Components/Study Techniques/sq3r'
 import Retrieval from './Components/Study Techniques/retrieval'
 import Spacedpractice from './Components/Study Techniques/spaced'
+import Hussein from './hussien';
 
 
 
@@ -86,7 +87,7 @@ function App() {
                                 <br></br>
 
                                 <img src='foxblue.png' alt="Hi"
-                                     style={{ width: '75%', maxWidth: '500px', height: 'auto' }} />
+                                    style={{ width: '75%', maxWidth: '500px', height: 'auto' }} />
 
                             </div>
 
@@ -117,6 +118,7 @@ function App() {
                     <Route path= '/sq3r' element = {<SQR3method />}/>
                     <Route path= '/retrieval' element = {<Retrieval />}/>
                     <Route path= '/spaced' element = {<Spacedpractice />}/>
+                    <Route path= '/hussien' element = {<Hussein />}/>
 
                 </Routes>
             </div>

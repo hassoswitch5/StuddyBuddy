@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './PomodoroTimer.css';
+import sound from "./sound1.mp3";
 
 
 const PomodoroTimer = () => {
@@ -13,7 +14,7 @@ const PomodoroTimer = () => {
             timer = setInterval(() => {
                 if (seconds === 0) {
                     if (minutes === 0) {
-                        new Audio("sound1.mp3").play();
+                        new Audio(sound).play();
                         setIsActive(false);
                     } else {
                         setMinutes(minutes - 1);

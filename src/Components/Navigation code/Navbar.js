@@ -63,9 +63,11 @@ const MyNavbar = () => {
                     StudyBuddy
                 </span>
             </Link>
+            
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <ul style={navLinksStyle}>
                     <li><Link to="/about-us" style={navLinkStyle}>About Us</Link></li>
+                    <li><Link to="/hussien" style={navLinkStyle}>Hussein</Link></li>
 
                 </ul>
                 <Link to="/signup" style={buttonStyle}>Sign Up</Link>

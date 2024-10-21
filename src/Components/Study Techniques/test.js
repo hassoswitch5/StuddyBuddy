@@ -65,13 +65,13 @@ function Testpage() {
                         <><h3>{item.id}</h3><div>
                             {item.answer.map(ans => (
                                 <><input type="radio"
-                                         id={ans}
-                                         value={ans}
-                                         checked={item.state[0] === ans}
+                                    id={ans}
+                                    value={ans}
+                                    checked={item.state[0] === ans}
 
-                                         onChange={() => {
-                                             item.state[1](ans);
-                                         } } /><label
+                                        onChange={() => {
+                                            item.state[1](ans);
+                                        } } /><label
                                     htmlFor={ans}
                                 >{ans}</label><br></br></>
 
